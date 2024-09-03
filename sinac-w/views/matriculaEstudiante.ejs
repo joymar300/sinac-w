@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/COLSAM_Logo.webp" type="image/x-icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/matricula.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+
+<form class="container pt-3 col-md-7 col-lg-8">
+    <div class="form-control">
+        <img src="img/COLSAM_LOGO.webp" class="logo">
+        <h2 class="text-center pt-3 pb-5">Institución Educativa Colegio San Alberto Magno Frailes Dominicos</h2>
+        <div class="mb-3">
+        <label for="" class="form-label pb-5 text-fill">
+            <% results.forEach((results) => { %>  
+            <h3>A quien interese, el estudiante <%= results.usuNombre %> <%= results.usuNombre2 %> <%= results.usuApellidoP %> <%= results.usuApellidoM %>, registrado en nuestra base de datos con el número de identificación <%= results.usuCedula %>. El cual tiene como dirección de vivienda: <%= results.usuDireccion %>. </h3>
+            <% }) %>
+
+            <h3>Certifica que se encuentra en nuestra base de datos y está validado como un estudiante de la institución.</h3>
+        
+            <% matricula.forEach((matricula) => { %>  
+            <h3>Dicho estudiante se encuentra matriculado en la institucion desde <%= matricula.estMatricula %></h3>
+            <% }) %>
+
+            <h3>Este documento es válido únicamente si se encuentra firmado por alguna autoridad del instituto.</h3>
+            <h3>Certificado generado automaticamente mediante el sistema COLSOFT de la institución.</h3>
+        </label>
+        
+        <h5>Firma:</h5></br>
+        <h5>__________________</h5>
+
+    </div>
+</form>
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<% results.forEach((results) => { %>  
+<script>document.title = 'Certificado de matricula <%= results.usuNombre %> <%= results.usuApellidoP %>'</script>
+<% }) %>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,85 @@
+<%- include('panelNavBar.ejs'); %>
+<form action="/registro" method="POST" class="pt-3 ">
+  <h3 class="fs-1 mb-4" style="margin-left: 700px;">Registro de usuario</h3>
+  <div class=" d-flex" style="margin-left: 250px;">
+    <div style="width: 600px;">
+      <div class="mt-2">
+        <label for="exampleInputEmail1" class="form-labelb"><b>Rol del usuario</b></label>
+        <select name="rol" class="form-select mb-3" aria-label="" required>
+        <option value="" selected disabled>Rol</option>
+        <option value="4">Estudiante</option>
+        <option value="3">Docente</option>
+        <option value="1" disabled>Coordinador</option>
+        <option value="2"disabled>Secretario</option>
+      </select>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label"><b>Primer nombre</b></label>
+        <input type="text" class="form-control" id="" name="nombre1" required>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label"><b>Segundo nombre</b></label>
+        <input type="text" class="form-control" id="" name="nombre2" required>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label"><b>Primer apellido</b></label>
+        <input type="text" class="form-control" id="" name="apellido1" required>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label"><b>Segundo apellido</b></label>
+        <input type="text" class="form-control" id="" name="apellido2" required>
+      </div>
+    </div>
+    <div class="ms-4 me-4" style="width: 5px; background-color: rgb(168, 164, 164); border-radius: 10px;"></div>
+    <div style="width: 600px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><b>Cedula</b></label>
+        <input type="text" class="form-control" id="" name="cedula" required>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label"><b>Telefono</b></label>
+        <input type="text" class="form-control" id="" name="telefono" required>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label"><b>Dirección de vivienda</b></label>
+        <input type="text" class="form-control" id="" name="vivienda" required>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label"><b>Correo electronico</b></label>
+        <input type="email" class="form-control" id="" name="email"  required>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label "><b>Contraseña</b></label>
+        <input type="password" class="form-control" id="" name="password" required>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary mt-4" style="margin-left: 835px;">Registrar</button>
+</form>
+
+
+
+</main>
+
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Panel de Registro'</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<% if(alert) { %>
+  <script>
+    Swal.fire({
+      title: '<%= alertTitle %>',
+      text:  '<%= alertMessage %>',
+      icon:  '<%= alertIcon %>',
+      showConfirmButton: <%= showConfirmButton %>,
+      timer: <%= timer %>,
+    }).then(()=>{
+        window.location = '/<%= ruta %>'
+    })
+  </script>
+<% } %>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

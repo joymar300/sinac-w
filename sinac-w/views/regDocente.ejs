@@ -1,0 +1,43 @@
+<%- include('panelNavBar.ejs'); %>
+<form action="/docente" method="POST" class="container pt-3 col-md-7 col-lg-8">
+  <h3 class="fs-1" style="margin-left: 350px;">Crear perfil de docente</h3>
+  <div style="width: 600px; margin-left: 250px;">
+    <div class="mb-3">
+     <label for="" class="form-label pb-3">Cedula del docente:</label>
+      <input name="cedula" type="text" class="form-control mb-3" id="" required>
+    </div>
+    <div>
+    <label for="" class="form-label">Materia que dictará el docente:</label><br>
+    <% materia.forEach((materia) => { %>
+    <div class="form-check form-check-inline mt-3">
+      <input name="materia[]" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="<%= materia.idMateria %>">
+      <label class="form-check-label" for="inlineCheckbox1"><%= materia.matNombre %></label>
+    </div>
+    <% }) %>
+  </div>
+  <div>
+    <label for="" class="form-label pt-3">En que grado:</label>
+    <select name="grado[]" class="form-select form-select-lg" multiple aria-label="multiple-select-example">
+      <option selected disabled>Menú</option>
+      <% grado.forEach((grado) => { %>
+      <option  value="<%= grado.idGrado %>"><%= grado.graNombre %></option>
+      <% }) %>
+    </select>
+  </div>
+    <div class="mb-3">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary mb" style="margin-left: 500px;">Registrar</button>
+</form>
+
+
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Registrar Docente'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

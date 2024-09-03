@@ -1,0 +1,29 @@
+<%- include('panelNavBar.ejs'); %>
+<form action="/salon" method="POST" class="container pt-3 col-md-7 col-lg-8">
+  <h3 class="fs-1" style="margin-left: 400px;">Consultar Grupo</h3>
+  <div style="width: 600px; margin-left: 250px;">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label pb-3" >Seleccione grado a consultar</label>
+      <select name="grado" class="form-select" aria-label="Default select example">
+        <option selected disabled>Grado</option>
+        <% results.forEach((grado) => { %> 
+        <option value="<%= grado.idGrado %>"><%= grado.graNombre %></option>
+        <% }) %>
+      </select>
+    </div>
+  <div class="mb-3" style="margin-left: 250px;">
+    <button type="submit" class="btn btn-primary mb">Consultar</button>
+    </div>
+  </div>
+</form>
+
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Consultar Grupo'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

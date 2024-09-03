@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel</title>
+    <link rel="shortcut icon" href="/img/sinac.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+ 
+
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+         
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+
+    
+    <!-- Barra sidebar -->
+    <link href="/css/sidebar.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/fondo.css">
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-lg ps-3" style="background-color: #FFDABB;">
+    <a href="/panel" class="navbar navbar-expand-lg brand text-decoration-none" style="width: 300px;">
+      <img src="/img/sinac.png" class="d-inline-block align-top" width="50" height="70" alt="">
+      <h1 class="mt-1 mb-0 ms-4" style="color: #8B0000;"><b>SINAC</b><p class="fs-6 text-dark">SISTEMA DE GESTION</p></h1>
+    </a>
+    <div class="container-fluid ms-3">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 280px;">
+          <li class="nav-item dropdown">
+            <a class="nav-link p-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <h4 class="text-dark">Consultas</h4>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/salon" class="dropdown-item">Consultar grupo</a></li>
+              <li><a href="/consulta" class="dropdown-item">Consultar estudiantes</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link p-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <h4 class="text-dark">Subir Notas</h4>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/notas" class="dropdown-item">Subir Notas</a></li>
+              <li>   <a href="/calcular" class="dropdown-item">Porcentajes</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+        <a class="dropdown-item" href="/logout">
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="me-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+        </a>
+    </div>
+</nav>

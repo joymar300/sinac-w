@@ -1,0 +1,51 @@
+<%- include('panelNavBar.ejs'); %>
+<form action="/notas" method="POST" class="container pt-3 col-md-7 col-lg-8">
+  <h3 class="fs-1" style="margin-left: 300px;">Registrar Notas de estudiantes</h3>
+  <div style="width: 700px; margin-left: 210px;">
+    <div class="mb-3">
+     <label for="exampleInputEmail1" class="form-label pb-3">Seleccione grado a registrar notas</label>
+     <select name="grado" class="form-select" aria-label="Default select example">
+      <option selected disabled>Grado</option>
+      <% results.forEach((grado) => { %>
+      <option value="<%= grado.idGrado %>"><%= grado.graNombre %></option>
+      <% }) %>
+    </select>
+    </div>
+    <label for="" class="form-label mb-3">Seleccione las materia:</label>
+    <select name="materia" class="form-select" aria-label="Default select example">
+      <option selected disabled>Materia</option>
+      <% materia.forEach((materia) => { %>
+      <option value="<%= materia.idMateria %>"><%= materia.matNombre %></option>
+      <% }) %>
+    </select>
+    <div class="mb-3">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label pb-3">Seleccione el periodo:</label>
+      <select name="periodo" class="form-select" aria-label="Default select example">
+      <option selected disabled>Periodo</option>
+       <option value="1">Periodo 1</option>
+       <option value="2">Periodo 2</option>
+       <option value="3">Periodo 3</option>
+     </select>
+     </div>
+     <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Cedula</label>
+        <input name="cedula" type="text" class="form-control" id="" name="cedula" required>
+     </div>
+    <div class="mb-3">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary mb" style="margin-left: 530px;">Consultar</button>
+</form>
+
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Subir notas'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,44 @@
+<%- include('panelNavBar.ejs'); %>
+      <form action="/matricula" method="POST" class="pt-3">
+        <h3 class="fs-1" style="margin-left: 670px;">Matricula de estudiante</h3>
+        <div class="mt-4" style="width: 600px; margin-left: 570px;">
+          <div class="mb-3">
+            <label for="" class="form-label">Cedula de estudiante</label>
+            <input type="text" class="form-control" id="" name="cedula" required>
+          </div>
+          <div class="form-check mt-3">
+            <label for="" class="form-label">¿Se realizó pago de matricula?</label>
+            <br>
+            <input class="form-check-input" type="radio" name="pago" id="" value="Si">
+            <label class="form-check-label">
+              Si
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="pago" id="" value="No">
+            <label class="form-check-label">
+              No
+            </label>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="" class="form-label">Fecha de nacimiento:</label>
+            <input type="date" class="form-control" id="" name="fechaNac" required>
+          </div>
+          <label for="" class="form-label mb-3">Sexo:</label>
+          <select class="form-select mb-3" aria-label="Default select example" name="sexo">
+            <option value="M">M</option>
+            <option value="F">F</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 835px;">Registrar</button>
+      </form>
+      
+      
+      </main>
+      
+      
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script>document.title = 'Matricular estudiante'</script>
+
+</body>
+</html>

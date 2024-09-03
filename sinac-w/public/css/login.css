@@ -1,0 +1,56 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-image: url(../img/fondo2.png);
+  background-size: auto;
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+}
+
+/* Para hacer card transparente */
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+  border-top: solid rgba(11, 140, 214, 0.5);
+  backdrop-filter: blur(15px);
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+  font-family: "Poppins",sans-serif;
+}
+
+img {
+  object-fit: cover;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  
+
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  
+}
+
+
+/* Cambios propios */

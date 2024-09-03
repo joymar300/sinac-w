@@ -1,0 +1,48 @@
+<%- include('panelNavBar.ejs'); %>
+
+<div class="p-3" style="width: 1600px; margin-left: 100px;">
+    <h3>Eventos de sistema</h3>
+  <div class="row justify-content-md-center">
+    <table id="eventos" class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Acción</th>
+          <th scope="col">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% results.forEach((evento) => { %>
+        <tr>
+          <th scope="row"><%= evento.id %></th>
+          <td><%= evento.accion %></td>
+          <td><%= evento.fecha %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+</main>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#eventos').DataTable();
+  });
+</script>
+<script>document.title = 'Eventos de sistema'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+
+</body>
+</html>

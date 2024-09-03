@@ -1,0 +1,43 @@
+<%- include('panelNavBar.ejs'); %>
+<form action="/registro" method="POST" class="container pt-3 col-md-7 col-lg-8">
+  <div>
+    <h3 class="fs-1" style="margin-left: 400px;">Consulta de usuario</h3>
+    <% usuario.forEach((usuario) => { %>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Cedula</label>
+      <input type="text" class="form-control" value="<%= usuario.usuCedula %>" disabled>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Nombres</label>
+      <input type="text" class="form-control" id="" value="<%= usuario.usuNombre %> <%= usuario.usuNombre2 %>" disabled>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Apellidos</label>
+      <input type="text" class="form-control" id="" value="<%= usuario.usuApellidoP %> <%= usuario.usuApellidoM %>" disabled>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Telefono</label>
+      <input type="text" class="form-control" id="" value="<%= usuario.usuTelefono %>" disabled>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Dirección de vivienda</label>
+      <input type="text" class="form-control" id="" value="<%= usuario.usuDireccion %>" disabled>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Correo electronico</label>
+      <input type="email" class="form-control" id="" value="<%= usuario.usuCorreo %>"  disabled>
+    </div>
+    <% }) %>
+</form>
+
+
+
+</main>
+
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Panel de Registro'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

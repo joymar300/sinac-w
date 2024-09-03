@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login COLSAM</title>
+    <link rel="shortcut icon" href="img/sinac.png" type="image/x-icon" >
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+<!-- SE CARGA BOOTSTRAP--> 
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+    </style>
+
+    
+    <!-- Estilos de la pagina -->
+    <link href="css/login.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+
+    
+<main class="form-signin w-100 m-auto">
+  <form action="/login" method="POST">
+    <img class="mb-4" src="img/COLSAM_Logo.webp" alt="" width="144" height="130" >
+    <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
+    <div class="form-floating">
+      <input type="email" class="form-control" id="" name="email" placeholder="name@example.com">
+      <label for="floatingInput">Correo</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id=""  name="password" placeholder="Password">
+      <label for="floatingPassword">Contraseña</label>
+    </div>
+
+    <button class="ingresar w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+
+    
+    <p class="mt-5 mb-3 text-muted">&copy; 2024</p>
+  </form>
+</main>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    
+<% if(alert) { %>
+  <script>
+    Swal.fire({
+      title: '<%= alertTitle %>',
+      text: '<%= alertMessage %>',
+      icon: '<%= alertIcon %>',
+      showConfirmButton: <%= showConfirmButton %>,
+      timer: <%= timer %>,
+    }).then(()=>{
+        window.location = '/<%= ruta %>'
+    })
+  </script>
+
+<% } %>
+
+  </body>
+</html>

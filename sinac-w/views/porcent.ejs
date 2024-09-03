@@ -1,0 +1,170 @@
+<%- include('panelNavBar.ejs'); %>
+<form action="/calcular" method="POST" class="container pt-3 col-md-7 col-lg-8">
+  <div>
+    <h3>Establecer porcentajes de las evaluaciones (%)</h3>
+    <div class="mb-3">
+     <label for="" class="form-label pb-3">Seleccione grado:</label>
+     <select name="grado" class="form-select" aria-label="Default select example">
+      <option selected disabled>Grado</option>
+      <% results.forEach((grado) => { %> 
+      <option value="<%= grado.idGrado %>"><%= grado.graNombre %></option>
+      <% }) %>
+    </select>
+    </div>
+    <label for="" class="form-label mb-3">Seleccione materia:</label>
+    <select name="materia" class="form-select" aria-label="Default select example">
+      <option selected disabled>Materia</option>
+      <% materia.forEach((materia) => { %>
+        <option value="<%= materia.idMateria %>"><%= materia.matNombre %></option>
+      <% }) %>
+    </select>
+    <div class="mb-3">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label pb-3">Seleccione periodo:</label>
+      <select name="periodo" class="form-select" aria-label="Default select example">
+      <option selected disabled>Periodo</option>
+       <option value="1">Periodo 1</option>
+       <option value="2">Periodo 2</option>
+       <option value="3">Periodo 3</option>
+     </select>
+     </div>
+     <div class="">
+        <label for="" class="form-label pb-3">Seleccione el porcentaje de cada evaluación (%):</label>
+       </div>
+       <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 1</label>
+            <select name="por1" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 2</label>
+            <select name="por2" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 3</label>
+            <select name="por3" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 4</label>
+            <select name="por4" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 5</label>
+            <select name="por5" class="form-select" aria-label="Default select example">     
+            <option value="0"selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 6</label>
+            <select name="por6" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+          </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 7</label>
+            <select name="por7" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+          </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 8</label>
+            <select name="por8" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+          </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 9</label>
+            <select name="por9" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+          </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label pb-1">Evaluación 10</label>
+            <select name="por10" class="form-select" aria-label="Default select example">     
+            <option value="0" selected>%</option>
+            <option value="0.05">5%</option>
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+            <option value="0.3">30%</option>
+          </select>
+       </div>
+    <div class="mb-3">
+    </div>
+  <button type="submit" class="btn btn-primary mb">Calcular</button>  
+  </div>
+</form>
+
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Calcular promedio'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

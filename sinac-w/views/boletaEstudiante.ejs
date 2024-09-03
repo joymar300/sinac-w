@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/COLSAM_Logo.webp" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/boleta.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="form-control p-3">
+    <h1>Boleta de Calificaciones</h1>
+    <h3>Nombre: {CONCAT.usuNombre.usuNombre2.usuApellidoP.usuApellidoM}, Periodo: {perNombre}</h3>
+  <div class="row justify-content-md-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Materia</th>
+          <th scope="col">1</th>
+          <th scope="col">2</th>
+          <th scope="col">3</th>
+          <th scope="col">4</th>
+          <th scope="col">5</th>
+          <th scope="col">6</th>
+          <th scope="col">7</th>
+          <th scope="col">8</th>
+          <th scope="col">9</th>
+          <th scope="col">10</th>
+          <th scope="col">Promedio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% notas.forEach((notas) => { %>
+        <tr>
+          <th scope="row"><%= notas.matNombre %></th>
+          <td><%= notas.eva1 %></td>
+          <td><%= notas.eva2 %></td>
+          <td><%= notas.eva3 %></td>
+          <td><%= notas.eva4 %></td>
+          <td><%= notas.eva5 %></td>
+          <td><%= notas.eva6 %></td>
+          <td><%= notas.eva7 %></td>
+          <td><%= notas.eva8 %></td>
+          <td><%= notas.eva9 %></td>
+          <td><%= notas.eva10 %></td>
+          <td><%= notas.promedio %></td>
+          <td><%= notas.perNombre %></td>
+        </tr> 
+        <% }) %>
+      </tbody>
+    </table>
+
+
+<h4>Documento generado mediante el sistema col-soft del instituto COLSAM</h4>
+    
+  </div>
+
+</div>
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

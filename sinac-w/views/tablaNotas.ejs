@@ -1,0 +1,107 @@
+<%- include('panelNavBar.ejs'); %>
+<div class="p-3" style="width: 1600px; margin-left: 100px;">
+  <% place %>
+    <h3>Grado: <%= place.graNombre %>, Materia: <%= place.matNombre %>, Periodo: <%= place.perNombre %></h3>
+  <%  %>
+  <div class="row justify-content-md-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Cedula</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% results.forEach((usuario) => { %>
+        <tr>
+          <th scope="row"><%= usuario.usuCedula %></th>
+          <td><%= usuario.usuNombre %> <%= usuario.usuNombre2 %></td>
+          <td><%= usuario.usuApellidoP %> <%= usuario.usuApellidoM %></td>
+          <td><!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <span class="btn-label"><i class="fa fa-pencil"></i></span>
+            </button>
+            
+            <!-- Modal -->
+            <form action="/update" method="POST">
+              <input id="" name="id" type="hidden" value="<%= usuario.id %>">
+              <input id="" name="materia" type="hidden" value="<%= usuario.idMateria %>">
+              <input id="" name="periodo" type="hidden" value="<%= usuario.idPeriodo %>">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Evaluaciones</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 1</label>
+                        <input name="eva1" value="<%= usuario.eva1 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 2</label>
+                        <input name="eva2" value="<%= usuario.eva2 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 3</label>
+                        <input name="eva3" value="<%= usuario.eva3 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 4</label>
+                        <input name="eva4" value="<%= usuario.eva4 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 5</label>
+                        <input name="eva5" value="<%= usuario.eva5 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 6</label>
+                        <input name="eva6" value="<%= usuario.eva6 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 7</label>
+                        <input name="eva7" value="<%= usuario.eva7 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 8</label>
+                        <input name="eva8" value="<%= usuario.eva8 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 9</label>
+                        <input name="eva9" value="<%= usuario.eva9 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Evaluación 10</label>
+                        <input name="eva10" value="<%= usuario.eva10 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                   </div>
+                   <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                  </div>
+
+                </div>
+              </div>
+            </div></td>
+          </form>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Tabla de estudiantes'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,37 @@
+<%- include('layout.ejs'); %>
+<form action="/materia" method="POST" class="container pt-3">
+  <div class="form-control">
+    <h3>Asignación de materias y grupo a cursar</h3>
+    <div class="mb-3">
+     <label for="exampleInputEmail1" class="form-label pb-3">Cedula del estudiante</label>
+      <input name="cedula" type="text" class="form-control mb-3" id="" required>
+    </div>
+    <label for="" class="form-label mb-3">Grado a inscribir las materias:</label>
+    <select name="grado[]" class="form-select" aria-label="Default select example">
+      <% results.forEach((grado) => { %>
+      <option value="<%= grado.idGrado %>"><%= grado.graNombre %></option>
+      <% }) %>
+    </select>
+      <% materia.forEach((materia) => { %>
+    <div class="form-check form-check-inline mt-3">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="<%= materia.idMateria %>" name="materia[]">
+      <label class="form-check-label" for="inlineCheckbox1"><%= materia.matNombre %></label>
+    </div>
+      <% }) %>
+    <div class="mb-3">
+    </div>
+  <button type="submit" class="btn btn-primary mb">Registrar</button>  
+  </div>
+</form>
+
+
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Asignación de materias'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,28 @@
+<%- include('panelNavBar.ejs'); %>
+
+
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>document.title = 'Registrar Docente'</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<% if(alert) { %>
+  <script>
+    Swal.fire({
+      title: '<%= alertTitle %>',
+      text:  '<%= alertMessage %>',
+      icon:  '<%= alertIcon %>',
+      showConfirmButton: <%= showConfirmButton %>,
+      timer: <%= timer %>,
+    }).then(()=>{
+        window.location = '/<%= ruta %>'
+    })
+  </script>
+<% } %>
+
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

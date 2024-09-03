@@ -1,0 +1,27 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+    background-image: url(../img/fondo2.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+}
+    
+
+
+
+.form-control {
+    background: #fff;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 10px;
+   
+
+  }
+  background-image{
+    
+    backdrop-filter: blur(10px);
+  }

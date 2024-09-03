@@ -1,0 +1,69 @@
+<%- include('panelNavBar.ejs'); %>
+
+<div class="p-3" style="width: 1600px; margin-left: 100px;">
+  <%  if (place) { %> 
+    <h3>Estudiante: <%= place.usuNombre %> <%= place.usuApellidoP %> <%= place.usuApellidoM %>.</h3>
+  <% } %>
+  <div class="row justify-content-md-center">
+    <table id="notas" class="table">
+      <thead>
+        <tr>
+          <th scope="col">Materia</th>
+          <th scope="col">1</th>
+          <th scope="col">2</th>
+          <th scope="col">3</th>
+          <th scope="col">4</th>
+          <th scope="col">5</th>
+          <th scope="col">6</th>
+          <th scope="col">7</th>
+          <th scope="col">8</th>
+          <th scope="col">9</th>
+          <th scope="col">10</th>
+          <th scope="col">Promedio</th>
+          <th scope="col">Periodo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% notas.forEach((notas) => { %>
+        <tr>
+          <th scope="row"><%= notas.matNombre %></th>
+          <td><%= notas.eva1 %></td>
+          <td><%= notas.eva2 %></td>
+          <td><%= notas.eva3 %></td>
+          <td><%= notas.eva4 %></td>
+          <td><%= notas.eva5 %></td>
+          <td><%= notas.eva6 %></td>
+          <td><%= notas.eva7 %></td>
+          <td><%= notas.eva8 %></td>
+          <td><%= notas.eva9 %></td>
+          <td><%= notas.eva10 %></td>
+          <td><%= notas.promedio %></td>
+          <td><%= notas.perNombre %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+</main>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#notas').DataTable();
+  });
+</script>
+<script>document.title = 'Tabla de Calificaciones'</script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,40 @@
+<%- include('panelNavBar.ejs'); %>
+
+<div class="p-3" style="width: 1600px; margin-left: 100px;">
+    <% place %> 
+    <h3>Grado: <%= place.graNombre %></h3>
+    <%  %>
+  <div class="row justify-content-md-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Cedula</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Contacto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% results.forEach((usuario) => { %>
+        <tr>
+          <th scope="row"><%= usuario.usuCedula %></th>
+          <td><%= usuario.usuNombre %> <%= usuario.usuNombre2 %></td>
+          <td><%= usuario.usuApellidoP %> <%= usuario.usuApellidoM %></td>
+          <td><%= usuario.usuTelefono %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+</main>
+
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+
+<!-- <script src="../js/sidebars.js"></script> -->
+</body>
+</html>
