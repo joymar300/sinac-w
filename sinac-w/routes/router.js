@@ -26,13 +26,13 @@ router.get('/panel', async (req, res) => {
         conexion.query('SELECT usuNombre, usuApellidoP, usuApellidoM, idRol, roNombre FROM usuario as u, rol as r WHERE r.idRol = u.Rol_idRol AND id = ?', [decodificada.id], (error, results) =>{
             let rol = results[0].idRol
             let user = results[0]
-            if (rol == 1 || rol == 2){
+            // if (rol == 1 || rol == 2){
                 res.render('panel', {nombre:user})
-            } else if (rol == 3){
+            // } else if (rol == 3){
                 res.render('panelDocente', {nombre:user})
-            } else if (rol == 4){
-                res.render('panelEstudiante', {nombre:user})
-            }
+            // } else if (rol == 4){
+            //     res.render('panelEstudiante', {nombre:user})
+            // }
         })
 
     } catch (error) {
