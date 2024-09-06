@@ -39,6 +39,12 @@ router.get('/panel', async (req, res) => {
         console.log(error)
     }
 })
+router.get('/panelNavBar', (req, res) => {
+    res.render('panelNavBar', {
+        idRol: res.locals.idRol
+    });
+});
+
 router.get('/registro',authController.isAuthenticated, authController.isAdmin, (req, res) => {
     res.render('registro', {alert:false})
 })

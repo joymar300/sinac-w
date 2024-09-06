@@ -73,7 +73,9 @@
   </head>
   <body>
 
-<nav class="navbar navbar-expand-lg ps-3" style="background-color: #FFDABB;">
+
+<% if(locals.idRol === 1){%>
+  <nav class="navbar navbar-expand-lg ps-3" style="background-color: #FFDABB;">
     <a href="/panel" class="navbar navbar-expand-lg brand text-decoration-none" style="width: 300px;">
       <img src="/img/sinac.png" class="d-inline-block align-top" width="50" height="70" alt="">
       <h1 class="mt-1 mb-0 ms-4" style="color: #8B0000;"><b>SINAC</b><p class="fs-6 text-dark">SISTEMA DE GESTION</p></h1>
@@ -125,10 +127,53 @@
         </ul>
       </div>
     </div>
-
+    
     <div>
+      <a class="dropdown-item" href="/logout">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="me-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+      </a>
+    </div>
+  </nav>
+  
+  
+  <%} else if(locals.idRol === 3){ %>
+    <nav class="navbar navbar-expand-lg ps-3" style="background-color: #FFDABB;">
+      <a href="/panel" class="navbar navbar-expand-lg brand text-decoration-none" style="width: 300px;">
+        <img src="/img/sinac.png" class="d-inline-block align-top" width="50" height="70" alt="">
+        <h1 class="mt-1 mb-0 ms-4" style="color: #8B0000;"><b>SINAC</b><p class="fs-6 text-dark">SISTEMA DE GESTION</p></h1>
+      </a>
+      <div class="container-fluid ms-3">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 280px;">
+            <li class="nav-item dropdown">
+              <a class="nav-link p-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <h4 class="text-dark">Consultas</h4>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/salon" class="dropdown-item">Consultar grupo</a></li>
+                <li><a href="/consulta" class="dropdown-item">Consultar estudiantes</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link p-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <h4 class="text-dark">Subir Notas</h4>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/notas" class="dropdown-item">Subir Notas</a></li>
+                <li>   <a href="/calcular" class="dropdown-item">Porcentajes</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div>
         <a class="dropdown-item" href="/logout">
           <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="me-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
         </a>
-    </div>
-</nav>
+      </div>
+    </nav>
+    
+    <% } %>
+    
+    
