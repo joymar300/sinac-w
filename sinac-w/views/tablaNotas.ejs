@@ -20,7 +20,7 @@
           <td><%= usuario.usuNombre %> <%= usuario.usuNombre2 %></td>
           <td><%= usuario.usuApellidoP %> <%= usuario.usuApellidoM %></td>
           <td><!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%= usuario.id %>">
                 <span class="btn-label"><i class="fa fa-pencil"></i></span>
             </button>
             
@@ -29,7 +29,7 @@
               <input id="" name="id" type="hidden" value="<%= usuario.id %>">
               <input id="" name="materia" type="hidden" value="<%= usuario.idMateria %>">
               <input id="" name="periodo" type="hidden" value="<%= usuario.idPeriodo %>">
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal<%= usuario.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
