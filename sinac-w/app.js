@@ -66,6 +66,7 @@ app.use(express.json());
 // Trabajar con las cookies
 app.use(cookieParser());
 
+
 // Middleware para establecer `idRol` en `res.locals`
 app.use(async (req, res, next) => {
     if (req.cookies.jwt) {
@@ -98,6 +99,7 @@ app.use((req, res, next) => {
     }
     next();
 });
+
 
 // Rutas
 app.use('/', require('./routes/router'));

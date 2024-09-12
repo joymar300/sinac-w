@@ -39,25 +39,97 @@
                   <div class="modal-body">
                     <div class="mb-3">
                         <label for="" class="form-label">Evaluación 1</label>
-                        <input name="eva1" value="<%= usuario.eva1 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                        <select name="eva1" class="form-select" aria-label="Default select example">
+                          <option selected value="<%= usuario.eva1 %>" >
+                            
+                            <% if (usuario.eva1 == 2.0) { %> Bajo
+                              <% } else if (usuario.eva1 == 3.1) { %> básico
+                              <% } else if (usuario.eva1 == 4.0) { %> alto
+                              <% } else if (usuario.eva1 == 5.0) { %> superior
+                              <% } %>
+                          </option>
+                           <option value="2.0">Bajo</option>
+                           <option value="3.1">básico</option>
+                           <option value="4.0">alto</option>
+                           <option value="5.0">superior</option>
+                         </select>
+                        <!-- <input name="eva1" value="<%= usuario.eva1 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Evaluación 2</label>
-                        <input name="eva2" value="<%= usuario.eva2 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                        <select name="eva2" class="form-select" aria-label="Default select example">
+                          <option selected value="<%= usuario.eva2 %>">
+                            <% if (usuario.eva2 == 2.0) { %> Bajo
+                              <% } else if (usuario.eva2 == 3.1) { %> básico
+                              <% } else if (usuario.eva2 == 4.0) { %> alto
+                              <% } else if (usuario.eva2 == 5.0) { %> superior
+                              <% } %>
+
+                          </option>
+                           <option value="2.0">Bajo</option>
+                           <option value="3.1">básico</option>
+                           <option value="4.0">alto</option>
+                           <option value="5.0">superior</option>
+                         </select>
+                        <!-- <input name="eva2" value="<%= usuario.eva2 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Evaluación 3</label>
-                        <input name="eva3" value="<%= usuario.eva3 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                        <select name="eva3" class="form-select" aria-label="Default select example">
+                          <option selected  value="<%= usuario.eva3 %>">
+                            <% if (usuario.eva3 == 2.0) { %> Bajo
+                              <% } else if (usuario.eva3 == 3.1) { %> básico
+                              <% } else if (usuario.eva3 == 4.0) { %> alto
+                              <% } else if (usuario.eva3 == 5.0) { %> superior
+                              <% } %>
+                          
+                          
+                          </option>
+                           <option value="2.0">Bajo</option>
+                           <option value="3.1">básico</option>
+                           <option value="4.0">alto</option>
+                           <option value="5.0">superior</option>
+                         </select>
+                        <!-- <input name="eva3" value="<%= usuario.eva3 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
                     </div>
                     <div class="mb-3">
+
                         <label for="" class="form-label">Evaluación 4</label>
-                        <input name="eva4" value="<%= usuario.eva4 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                        <select name="eva4" class="form-select" aria-label="Default select example">
+                          <option selected value="<%= usuario.eva4 %>">
+                            <% if (usuario.eva4 == 2.0) { %> Bajo
+                              <% } else if (usuario.eva4 == 3.1) { %> básico
+                              <% } else if (usuario.eva4 == 4.0) { %> alto
+                              <% } else if (usuario.eva4 == 5.0) { %> superior
+                              <% } %>
+
+                          </option>
+                           <option value="2.0">Bajo</option>
+                           <option value="3.1">básico</option>
+                           <option value="4.0">alto</option>
+                           <option value="5.0">superior</option>
+                         </select>
+                        <!-- <input name="eva4" value="<%= usuario.eva4 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Evaluación 5</label>
-                        <input name="eva5" value="<%= usuario.eva5 %>" type="number" step="0.1" class="form-control" id="" max="5">
+                        <select name="eva5" class="form-select" aria-label="Default select example">
+                          <option selected value="<%= usuario.eva5 %>">
+
+                            <% if (usuario.eva5 == 2.0) { %> Bajo
+                              <% } else if (usuario.eva5 == 3.1) { %> básico
+                              <% } else if (usuario.eva5 == 4.0) { %> alto
+                              <% } else if (usuario.eva5 == 5.0) { %> superior
+                              <% } %>
+                          </option>
+                           <option value="2.0">Bajo</option>
+                           <option value="3.1">básico</option>
+                           <option value="4.0">alto</option>
+                           <option value="5.0">superior</option>
+                         </select>
+                        <!-- <input name="eva5" value="<%= usuario.eva5 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="" class="form-label">Evaluación 6</label>
                         <input name="eva6" value="<%= usuario.eva6 %>" type="number" step="0.1" class="form-control" id="" max="5">
                     </div>
@@ -76,7 +148,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Evaluación 10</label>
                         <input name="eva10" value="<%= usuario.eva10 %>" type="number" step="0.1" class="form-control" id="" max="5">
-                   </div>
+                   </div> -->
                    <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -98,9 +170,55 @@
 
 </main>
 
-
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script>document.title = 'Tabla de estudiantes'</script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  // Manejo del formulario con fetch y SweetAlert
+  document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          
+          const formData = new FormData(this);
+
+          try {
+              const response = await fetch('/update', {
+                  method: 'POST',
+                  body: formData
+              });
+
+              const result = await response.json();
+
+              if (result.success) {
+                  Swal.fire({
+                      icon: 'success',
+                      title: '¡Hecho!',
+                      text: result.message,
+                      confirmButtonText: 'Ok'
+                  }).then(() => {
+                      // Opcional: recargar la página o redirigir
+                      location.reload();
+                  });
+              } else {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Error',
+                      text: result.message,
+                      confirmButtonText: 'Ok'
+                  });
+              }
+          } catch (error) {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Hubo un problema con la solicitud',
+                  confirmButtonText: 'Ok'
+              });
+          }
+      });
+  });
+</script> -->
 
 <!-- <script src="../js/sidebars.js"></script> -->
 </body>

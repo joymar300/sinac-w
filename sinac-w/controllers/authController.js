@@ -292,16 +292,25 @@ exports.update = async (req, res) => {
         //console.log(id, materia, periodo, eva1)
     
         conexion.query('UPDATE evaluaciones SET eva1 = ?, eva2 = ?, eva3 = ?, eva4 = ?, eva5 = ?, eva6 = ?, eva7 = ?, eva8 = ?, eva9 = ?, eva10 = ? WHERE Estudiante_Usuario_id = ? AND Materia_idMateria = ? AND Periodo_idPeriodo = ?', [eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, id, materia, periodo], (error, results) =>{
-            if (error){console.log(error)}
-            res.render('blank', {
-                alert:true,
-                alertTitle: 'Notas actualizadas',
-                alertMessage: 'Las notas han sido actualizadas con éxito',
-                alertIcon: 'success',
-                showConfirmButton: true,
-                timer: false,
-                ruta: 'notas'
-            })
+               // Log para verificar los datos
+            console.log('Datos recibidos:', req.body);
+            if (error) {
+                console.log(error);
+                res.send({ success: false, message: 'Error al actualizar las notas' });
+            } else {
+               // res.send({ success: true, message: 'Las notas han sido actualizadas con éxito' });
+            }
+            
+            //if (error){console.log(error)}
+            // res.render('blank', {
+            //     alert:true,
+            //     alertTitle: 'Notas actualizadas',
+            //     alertMessage: 'Las notas han sido actualizadas con éxito',
+            //     alertIcon: 'success',
+            //     showConfirmButton: true,
+            //     timer: false,
+            //     ruta: 'notas'
+            // })
         })
         const decodificada = await (promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO))
         const userID = decodificada.id
