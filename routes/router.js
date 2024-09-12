@@ -177,6 +177,12 @@ router.get('/salon', (req, res) => {
 router.get('/boleta', (req, res) =>{
     res.render('boletaEstudiante')
 })
+router.get('/desempeno', (req, res) =>{
+    res.render('desempeno')
+})
+router.get('/observaciones', (req, res) =>{
+    res.render('observaciones')
+})
 
 
 //ROUTER para metodos de authController

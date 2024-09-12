@@ -5,6 +5,21 @@
     <h3>Estudiante: <%= place.usuNombre %> <%= place.usuApellidoP %> <%= place.usuApellidoM %>.</h3>
   <% } %>
   <div class="row justify-content-md-center">
+    <div class="p-3" style="width: 1600px; margin-left: 100px;">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="periodoFiltro" class="form-label">Filtrar por Periodo:</label>
+          <select id="periodoFiltro" class="form-select">
+          
+      
+              <option value="Primer periodo" selected>Primer periodo</option>
+              <option value="Segundo periodo">Segundo periodo</option>
+              <option value="Tercer periodo">Tercer periodo</option>
+         
+          </select>
+        </div>
+      </div>
+    
     <table id="notas" class="table">
       <thead>
         <tr>
@@ -27,18 +42,87 @@
         <% notas.forEach((notas) => { %>
         <tr>
           <th scope="row"><%= notas.matNombre %></th>
-          <td><%= notas.eva1 %></td>
-          <td><%= notas.eva2 %></td>
-          <td><%= notas.eva3 %></td>
-          <td><%= notas.eva4 %></td>
-          <td><%= notas.eva5 %></td>
-          <td><%= notas.eva6 %></td>
-          <td><%= notas.eva7 %></td>
-          <td><%= notas.eva8 %></td>
-          <td><%= notas.eva9 %></td>
-          <td><%= notas.eva10 %></td>
-          <td><%= notas.promedio %></td>
-          <td><%= notas.perNombre %></td>
+          <td>
+            <% if (notas.eva1 < 2.9 && notas.eva1 > 1.0 ) { %> Bajo
+              <% } else if (notas.eva1 == 3.1) { %> básico
+              <% } else if (notas.eva1== 4.0) { %> alto
+              <% } else if (notas.eva1 == 5.0) { %> superior
+              <% } %>
+          </td>
+          <td>
+            <% if (notas.eva2 < 2.9 && notas.eva2 > 1.0 ) { %> Bajo
+              <% } else if (notas.eva2 == 3.1) { %> básico
+              <% } else if (notas.eva2== 4.0) { %> alto
+              <% } else if (notas.eva2 == 5.0) { %> superior
+              <% } %>
+          
+          </td>
+          <td>
+            <% if (notas.eva3 < 2.9 && notas.eva3> 1.0 ) { %> Bajo
+            <% } else if (notas.eva3 == 3.1) { %> básico
+            <% } else if (notas.eva3== 4.0) { %> alto
+            <% } else if (notas.eva3 == 5.0) { %> superior
+            <% } %>
+          </td>
+          <td>
+            <% if (notas.eva4 < 2.9 && notas.eva4 > 1.0 ) { %> Bajo
+              <% } else if (notas.eva4 == 3.1) { %> básico
+              <% } else if (notas.eva4== 4.0) { %> alto
+              <% } else if (notas.eva4 == 5.0) { %> superior
+              <% } %>
+          </td>
+          <td>
+            <% if (notas.eva5  < 2.9 && notas.eva5  > 1.0 ) { %> Bajo
+              <% } else if (notas.eva5  == 3.1) { %> básico
+              <% } else if (notas.eva5 == 4.0) { %> alto
+              <% } else if (notas.eva5  == 5.0) { %> superior
+              <% } %>
+          </td>
+          <td>
+            <% if (notas.eva6< 2.9 && notas.eva6 > 1.0 ) { %> Bajo
+              <% } else if (notas.eva6 == 3.1) { %> básico
+              <% } else if (notas.eva6== 4.0) { %> alto
+              <% } else if (notas.eva6 == 5.0) { %> superior
+              <% } %>
+          </td>
+          <td>
+            <% if (notas.eva7 < 2.9 && notas.eva7 > 1.0 ) { %> Bajo
+              <% } else if (notas.eva7 == 3.1) { %> básico
+              <% } else if (notas.eva7== 4.0) { %> alto
+              <% } else if (notas.eva7 == 5.0) { %> superior
+              <% } %>
+          </td>
+          <td>
+            <% if (notas.eva8 < 2.9 && notas.eva8> 1.0 ) { %> Bajo
+              <% } else if (notas.eva8 == 3.1) { %> básico
+              <% } else if (notas.eva8== 4.0) { %> alto
+              <% } else if (notas.eva8 == 5.0) { %> superior
+              <% } %>
+          </td>
+          <td>
+            <% if (notas.eva9 < 2.9 && notas.eva9 > 1.0 ) { %> Bajo
+              <% } else if (notas.eva9 == 3.1) { %> básico
+              <% } else if (notas.eva9== 4.0) { %> alto
+              <% } else if (notas.eva9 == 5.0) { %> superior
+              <% } %>
+          </td>
+          <td>
+            <% if (notas.eva10< 2.9 && notas.eva10 > 1.0 ) { %> Bajo
+              <% } else if (notas.eva10 == 3.1) { %> básico
+              <% } else if (notas.eva10== 4.0) { %> alto
+              <% } else if (notas.eva10 == 5.0) { %> superior
+              <% } %>
+          </td>
+          <td>
+            <% if (notas.promedio < 3.0 && notas.promedio > 1.0 ) { %> Bajo
+              <% } else if (notas.promedio > 3.1 &&   notas.promedio < 3.9) { %> básico
+              <% } else if (notas.promedio > 4.0 && notas.promedio < 4.9) { %> alto
+              <% } else if (notas.promedio > 5.0) { %> superior
+              <% } %>
+          </td>
+          <td><%= notas.perNombre %>
+          
+          </td>
         </tr>
         <% }) %>
       </tbody>
@@ -61,7 +145,26 @@
   $(document).ready(function () {
     $('#notas').DataTable();
   });
+
+  $(document).ready(function () {
+  // Inicializar la tabla con DataTables
+  var table = $('#notas').DataTable();
+
+  // Evento para el filtro por periodo
+  $('#periodoFiltro').on('change', function () {
+    var selectedPeriodo = $(this).val();
+    
+    // Aplicar filtro personalizado
+    if (selectedPeriodo) {
+      table.column(12).search('^' + selectedPeriodo + '$', true, false).draw(); // Filtrar la columna 12 (periodo)
+    } else {
+      table.column(12).search('').draw(); // Limpiar el filtro
+    }
+  });
+});
 </script>
+
+
 <script>document.title = 'Tabla de Calificaciones'</script>
 
 <!-- <script src="../js/sidebars.js"></script> -->
