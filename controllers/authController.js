@@ -254,7 +254,7 @@ exports.genDesempe = (req, res) => {
     const periodo = req.body.periodo
     const cedula = req.body.cedula
     //console.log(grado, materia, periodo, cedula)
-    conexion.query('SELECT DISTINCT usuNombre, usuApellidoP, usuApellidoM, matNombre, perNombre, eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, promedio FROM usuario AS U, evaluaciones AS E, materia AS M, periodo AS P, grupo AS G, grado AS S WHERE U.id = E.Estudiante_Usuario_id AND M.idMateria = E.Materia_idMateria AND G.Grado_idGrado = S.idGrado AND P.idPeriodo = E.Periodo_idPeriodo AND E.Periodo_idPeriodo = P.idPeriodo AND usuCedula = ? AND  E.Periodo_idPeriodo= ? ORDER BY perNombre ',[cedula,periodo], (error, results) =>{
+    conexion.query(' ',[cedula,periodo], (error, results) =>{
         if (results.length == 0){
             res.render('blank', {
                 alert:true,
@@ -438,11 +438,11 @@ exports.calcular = (req, res) => {
     const por3 = req.body.por3
     const por4 = req.body.por4
     const por5 = req.body.por5
-    const por6 = req.body.por6
-    const por7 = req.body.por7
-    const por8 = req.body.por8
-    const por9 = req.body.por9
-    const por10 = req.body.por10
+    // const por6 = req.body.por6
+    // const por7 = req.body.por7
+    // const por8 = req.body.por8
+    // const por9 = req.body.por9
+    // const por10 = req.body.por10
 
     const grado = req.body.grado
     const materia = req.body.materia
@@ -460,13 +460,14 @@ exports.calcular = (req, res) => {
             let cal3 = result.eva3 * por3
             let cal4 = result.eva4 * por4
             let cal5 = result.eva5 * por5
-            let cal6 = result.eva6 * por6
-            let cal7 = result.eva7 * por7
-            let cal8 = result.eva8 * por8
-            let cal9 = result.eva9 * por9
-            let cal10 = result.eva10 * por10
+            // let cal6 = result.eva6 * por6
+            // let cal7 = result.eva7 * por7
+            // let cal8 = result.eva8 * por8
+            // let cal9 = result.eva9 * por9
+            // let cal10 = result.eva10 * por10
 
-            let total = (cal1+cal2+cal3+cal4+cal5+cal6+cal7+cal8+cal9+cal10)
+           // let total = (cal1+cal2+cal3+cal4+cal5+cal6+cal7+cal8+cal9+cal10)
+            let total = (cal1+cal2+cal3+cal4+cal5)
             let promedio = Math.round((total + Number.EPSILON) * 100) / 100
 
             //console.log('Usuario id: '+id+' Con la materia: '+materia+' En el periodo '+periodo+ ' Tiene un promedio de: ' +promedio)
@@ -479,7 +480,7 @@ exports.calcular = (req, res) => {
         } res.render('blank', {
             alert:true,
             alertTitle: 'Notas ponderadas',
-            alertMessage: 'Las notas han sido ponderadas con éxito',
+            alertMessage: 'Las notas han sido promediadas con éxito',
             alertIcon: 'success',
             showConfirmButton: true,
             timer: false,

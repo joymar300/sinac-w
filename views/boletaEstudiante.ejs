@@ -6,71 +6,166 @@
     <link rel="shortcut icon" href="img/COLSAM_Logo.webp" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/boleta.css">
 
-<link rel="stylesheet" href="css/boleta.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    
+    <!-- Estilos personalizados para el boletín -->
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .boletin-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .header h4 {
+            font-weight: normal;
+            color: #555;
+        }
+
+        h3 {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+
+        .table thead th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Estilos para la impresión */
+        @media print {
+            body {
+                background-color: #fff;
+            }
+
+            .boletin-container {
+                box-shadow: none;
+                border: none;
+            }
+
+            .header img {
+                display: block;
+            }
+
+            .table thead th {
+                background-color: #333 !important;
+                color: #fff !important;
+            }
+
+            .footer {
+                page-break-after: avoid;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 
 </head>
 <body>
-    <div class="form-control p-3">
-    <h1>Boleta de Calificaciones</h1>
-    <%  if (place) { %> 
-      <h3>Estudiante: <%= place.usuNombre %> <%= place.usuApellidoP %> <%= place.usuApellidoM %>.</h3>
-      <!-- <h3>Nombre: {CONCAT.usuNombre.usuNombre2.usuApellidoP.usuApellidoM}, Periodo: {perNombre}</h3> -->
-    <% } %>
-  <div class="row justify-content-md-center">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Materia</th>
-          <th scope="col">1</th>
-          <th scope="col">2</th>
-          <th scope="col">3</th>
-          <th scope="col">4</th>
-          <th scope="col">5</th>
-          <th scope="col">6</th>
-          <th scope="col">7</th>
-          <th scope="col">8</th>
-          <th scope="col">9</th>
-          <th scope="col">10</th>
-          <th scope="col">Promedio</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% notas.forEach((notas) => { %>
-        <tr>
-          <th scope="row"><%= notas.matNombre %></th>
-          <td><%= notas.eva1 %></td>
-          <td><%= notas.eva2 %></td>
-          <td><%= notas.eva3 %></td>
-          <td><%= notas.eva4 %></td>
-          <td><%= notas.eva5 %></td>
-          <td><%= notas.eva6 %></td>
-          <td><%= notas.eva7 %></td>
-          <td><%= notas.eva8 %></td>
-          <td><%= notas.eva9 %></td>
-          <td><%= notas.eva10 %></td>
-          <td><%= notas.promedio %></td>
-          <td><%= notas.perNombre %></td>
-        </tr> 
-        <% }) %>
-      </tbody>
-    </table>
+    <div class="boletin-container">
+        <div class="header">
+            <img src="img/COLSAM_Logo.webp" alt="Escudo Institucional">
+            <h1>Boleta de Calificaciones</h1>
+            <h4>Instituto COLSAM</h4>
+        </div>
 
+        <% if (place) { %>
+            <h3>Estudiante: <%= place.usuNombre %> <%= place.usuApellidoP %> <%= place.usuApellidoM %></h3>
+        <% } %>
 
-<h4>Documento generado mediante el sistema SINAC-W del instituto COLSAM</h4>
-    
-  </div>
+        <div class="row justify-content-md-center">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Materia</th>
+                        <th scope="col">Promedio</th>
+                        <th scope="col">Periodo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% notas.forEach((notas) => { %>
+                    <tr>
+                        <th scope="row"><%= notas.matNombre %></th>
+                        <td>
+                            <% if (notas.promedio <= 3.0 && notas.promedio > 1.0) { %> 
+                                Bajo
+                            <% } else if (notas.promedio >= 3.1 && notas.promedio <= 3.9) { %> 
+                                Básico
+                            <% } else if (notas.promedio >= 4.0 && notas.promedio <= 4.9) { %> 
+                                Alto
+                            <% } else if (notas.promedio > 5.0) { %> 
+                                Superior
+                            <% } %>
+                        </td>
+                        <td><%= notas.perNombre %></td>
+                    </tr> 
+                    <% }) %>
+                </tbody>
+            </table>
 
-</div>
+            <div class="footer">
+                <h4>Documento generado mediante el sistema SINAC-W del instituto COLSAM</h4>
+            </div>
 
-</main>
+            <!-- Botón de impresión -->
+            <div class="text-center mt-4">
+                <button class="btn btn-primary no-print" onclick="imprimirBoletin()">
+                    <i class="fa fa-print"></i> Imprimir Boletín
+                </button>
+            </div>
 
+        </div>
+    </div>
 
-<script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
 
-<!-- <script src="../js/sidebars.js"></script> -->
+    <!-- Función para imprimir el boletín -->
+    <script>
+        function imprimirBoletin() {
+            window.print();
+        }
+    </script>
 </body>
 </html>
