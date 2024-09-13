@@ -174,9 +174,9 @@ router.get('/salon', (req, res) => {
 
 })
 
-router.get('/boleta', (req, res) =>{
-    res.render('boletaEstudiante')
-})
+// router.get('/boleta', (req, res) =>{
+//     res.render('boletaEstudiante')
+// })
 router.get('/desempeno', (req, res) =>{
     res.render('desempeno')
 })
@@ -199,6 +199,7 @@ router.post('/calcular', authController.calcular)
 router.post('/buscar_matricula', authController.geneMatricula2)
 router.post('/update', authController.update)
 router.get('/logout', authController.logout)
+router.post('/boletin', authController.boletin)
 
 
 module.exports = router

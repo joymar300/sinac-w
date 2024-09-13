@@ -16,7 +16,10 @@
 <body>
     <div class="form-control p-3">
     <h1>Boleta de Calificaciones</h1>
-    <h3>Nombre: {CONCAT.usuNombre.usuNombre2.usuApellidoP.usuApellidoM}, Periodo: {perNombre}</h3>
+    <%  if (place) { %> 
+      <h3>Estudiante: <%= place.usuNombre %> <%= place.usuApellidoP %> <%= place.usuApellidoM %>.</h3>
+      <!-- <h3>Nombre: {CONCAT.usuNombre.usuNombre2.usuApellidoP.usuApellidoM}, Periodo: {perNombre}</h3> -->
+    <% } %>
   <div class="row justify-content-md-center">
     <table class="table">
       <thead>
@@ -57,7 +60,7 @@
     </table>
 
 
-<h4>Documento generado mediante el sistema col-soft del instituto COLSAM</h4>
+<h4>Documento generado mediante el sistema SINAC-W del instituto COLSAM</h4>
     
   </div>
 
