@@ -183,7 +183,9 @@ router.get('/desempeno', (req, res) =>{
 router.get('/observaciones', (req, res) =>{
     res.render('observaciones')
 })
-
+router.get('/contacto', (req, res) =>{
+    res.render('contacto')
+})
 
 //ROUTER para metodos de authController
 router.post('/login', authController.login)
