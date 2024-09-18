@@ -12,6 +12,7 @@ const conexion = require('../database/db')
 const authController = require('../controllers/authController')
 const update = require('../controllers/authController')
 const { pbkdf2 } = require('crypto')
+const { error } = require('console')
 
 //ROUTER para las vistas GET
 router.get('/', (req, res) => {
@@ -178,14 +179,41 @@ router.get('/salon', (req, res) => {
 //     res.render('boletaEstudiante')
 // })
 router.get('/desempeno', (req, res) =>{
-    res.render('desempeno')
+    conexion.query('SELECT * FROM grado ORDER BY graNombre ASC', (error, results) => {
+        if (error){
+            throw error
+        }else{
+            res.render('desempeno', {results:results})
+        }
+    })
+ 
 })
-router.get('/observaciones', (req, res) =>{
-    res.render('observaciones')
+router.get('/genobservaciones', (req, res) =>{
+    res.render('genobservaciones')
 })
 router.get('/contacto', (req, res) =>{
     res.render('contacto')
 })
+// router.post('/desempenoEstu',(req, res)=>{
+//     const id= req.body.id
+//     const periodo= req.body.periodo;
+//     conexion.query('SELECT DISTINCT comentario FROM `desempeno`as d, `grupo` gru, `usuario`  WHERE d.idGrado =gru.Grado_idGrado AND gru.Estudiante_Usuario_id= ? and d.idPeriodo= ?',[id],[periodo],(error, result)=>{
+//         if(error){
+//             console.log(error)
+//         }else{
+
+//             res.render('views/viewdesempenoEstudiante',{data:result})
+//         }
+//     } )
+// } )
+
+router.get("/consuldespeno", (req, res)=>{
+    res.render('consultarDesespeno')
+})
+router.get("/consulObservaciones", (req, res)=>{
+    res.render('consulObservaciones')
+})
+
 
 //ROUTER para metodos de authController
 router.post('/login', authController.login)
@@ -202,6 +230,8 @@ router.post('/buscar_matricula', authController.geneMatricula2)
 router.post('/update', authController.update)
 router.get('/logout', authController.logout)
 router.post('/boletin', authController.boletin)
-
-
+router.post('/generarDes', authController.generarDes)
+router.post('/desempenoEstu', authController.consultarDespeno)
+router.post('/genObservacion', authController.generarObs)
+router.post('/obsEstudiante', authController.consultarObservacion)
 module.exports = router

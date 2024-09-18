@@ -5,6 +5,7 @@ const {promisify} = require('util')
 const pdf = require('html-pdf')
 const path = require('path')
 const ejs = require('ejs')
+const { error } = require('console')
 
 //procedimiento de registro usuarios
 //Verificar en base de datos si la cedula ya esta
@@ -729,3 +730,128 @@ exports.logout = (req, res) => {
     res.clearCookie('col')
     return res.redirect('/')
 }
+
+exports.generarDes = async (req,res)=>{
+    try{
+        const grado = req.body.grado;
+        const periodo = req.body.periodo;
+        const cedula = req.body.cedula;
+        const comentario = req.body.comentario;
+
+        conexion.query('INSERT INTO desempeno SET ? ', { comentario:comentario, docente_id:cedula,idGrado:grado, idPeriodo:periodo}, (error, results)=>{
+            if (error) {console.log(error)}
+            else{
+
+                res.render('blank', {
+                    alert:true,
+                    alertTitle: 'Creación exitosa',
+                    alertMessage: 'Las nota de desempeño han sido creada con éxito',
+                    alertIcon: 'success',
+                    showConfirmButton: true,
+                    timer: false,
+                    ruta: 'desempeno'
+                })
+            }
+        })
+    }catch (error){
+        console.log(error)
+
+    }
+
+}
+exports.generarObs = async (req,res)=>{
+    try{
+        const idEstudiante = req.body.idEstudiante;
+        const periodo = req.body.periodo;
+        const cedula = req.body.cedula;
+        const comentario = req.body.comentario;
+        conexion.query('select id FROM usuario where usuCedula = ?',[idEstudiante],(error, results)=>{
+            console.log('el resultado ess',results)
+            if(error){console.log(error)}
+            else{
+                conexion.query('INSERT INTO observacion SET ? ', { comentario:comentario, docente_id:cedula, idPeriodo:periodo, estudiante_id:results[0].id}, (error, results)=>{
+                    if (error) {console.log(error)}
+                    else{
+        
+                        res.render('blank', {
+                            alert:true,
+                            alertTitle: 'Creación exitosa',
+                            alertMessage: 'Las nota de desempeño han sido creada con éxito',
+                            alertIcon: 'success',
+                            showConfirmButton: true,
+                            timer: false,
+                            ruta: 'genobservaciones'
+                        })
+                    }
+                })
+
+
+            }
+        })
+
+    }catch (error){
+        console.log(error)
+
+    }
+
+}
+
+exports.consultarDespeno = async (req, res) => {
+    try {
+        const id = req.body.id;
+        const periodo = req.body.periodo;
+
+        // Consulta SQL corregida
+        conexion.query(
+            `SELECT DISTINCT comentario 
+            FROM desempeno AS d 
+            JOIN grupo gru ON d.idGrado = gru.Grado_idGrado 
+            WHERE gru.Estudiante_Usuario_id = ? 
+            AND d.idPeriodo = ?`,
+            [id, periodo],
+            (error, result) => {
+                if (error) {
+                    console.log(error);
+                    // Devuelve una respuesta en caso de error
+                    return res.status(500).send('Error en la consulta');
+                } else {
+                    // Renderiza la vista con los resultados
+                    res.render('viewdesempenoEstudiante', { data: result });
+                }
+            }
+        );
+    } catch (error) {
+        console.log(error);
+        // Devuelve una respuesta en caso de error inesperado
+        return res.status(500).send('Error en el servidor');
+    }
+};
+exports.consultarObservacion = async (req, res) => {
+    try {
+        const id = req.body.id;
+        const periodo = req.body.periodo;
+
+        // Consulta SQL corregida
+        conexion.query(
+            `SELECT DISTINCT comentario 
+            FROM observacion AS d 
+            WHERE d.estudiante_id = ? 
+            AND d.idPeriodo = ?`,
+            [id, periodo],
+            (error, result) => {
+                if (error) {
+                    console.log(error);
+                    // Devuelve una respuesta en caso de error
+                    return res.status(500).send('Error en la consulta');
+                } else {
+                    // Renderiza la vista con los resultados
+                    res.render('viewObservacioneEstudiante', { data: result });
+                }
+            }
+        );
+    } catch (error) {
+        console.log(error);
+        // Devuelve una respuesta en caso de error inesperado
+        return res.status(500).send('Error en el servidor');
+    }
+};

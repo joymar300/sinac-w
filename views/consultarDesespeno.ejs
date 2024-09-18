@@ -1,0 +1,26 @@
+<%- include('panelNavBar.ejs'); %>
+<form action="/desempenoEstu" method="POST" class="container pt-3 col-md-7 col-lg-8">
+    <div class="form-control">
+      <h3>consultar desempeño del curso</h3>
+      <!-- <div class="mb-3">
+       <label for="" class="form-label pb-3">Cedula de estudiante:</label>
+        <input name="cedula" type="text" class="form-control mb-3" id="" required>
+      </div> -->
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Seleccione el periodo:</label>
+        <select name="periodo" class="form-select" aria-label="Default select example">
+          <option selected disabled>Periodo</option>
+          <option value="1">Periodo 1</option>
+          <option value="2">Periodo 2</option>
+          <option value="3">Periodo 3</option>
+        </select>
+      </div>
+      <div class="mb-3" >
+        <input name="id" value="<%= locals.id %>" hidden > </input>
+      </div>
+
+
+    <button type="submit" class="btn btn-danger mb">consultar</button> 
+    </div>
+</form>

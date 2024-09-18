@@ -72,13 +72,14 @@ app.use(async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO);
-            conexion.query('SELECT idRol FROM usuario as u, rol as r WHERE r.idRol = u.Rol_idRol AND id = ?', [decoded.id], (error, results) => {
+            conexion.query('SELECT idRol, id  FROM usuario as u, rol as r WHERE r.idRol = u.Rol_idRol AND id = ?', [decoded.id], (error, results) => {
                 if (error) {
                     console.error('Error en la consulta de usuario:', error);
                     return next();
                 }
                 res.locals.idRol = results[0]?.idRol || null;
-                console.log("ide ro dwdas ", res.locals.idRol)
+                res.locals.id = results[0]?.id || null;
+                console.log("ide ro dwdas ", res.locals.idRol, "cedula", res.locals.id, )
                 next();
             });
         } catch (error) {

@@ -129,21 +129,25 @@
                     <tr>
                         <th scope="row"><%= notas.matNombre %></th>
                         <td>
-                            <% if (notas.promedio <= 3.0 && notas.promedio > 1.0) { %>
+                            <% if (notas.promedio <= 3.0 && notas.promedio > 1.0) { %> 
                                 Bajo
-                            <% } else if (notas.promedio >= 3.1 && notas.promedio <= 3.9) { %>
+                            <% } else if (notas.promedio >= 3.1 && notas.promedio <= 3.9) { %> 
                                 Básico
-                            <% } else if (notas.promedio >= 4.0 && notas.promedio <= 4.9) { %>
+                            <% } else if (notas.promedio >= 4.0 && notas.promedio <= 4.9) { %> 
                                 Alto
-                            <% } else if (notas.promedio > 5.0) { %>
+                            <% } else if (notas.promedio > 5.0) { %> 
                                 Superior
                             <% } %>
                         </td>
                         <td><%= notas.perNombre %></td>
-                    </tr>
+                    </tr> 
                     <% }) %>
                 </tbody>
             </table>
+
+            <div class="footer">
+                <h4>Documento generado mediante el sistema SINAC-W del instituto COLSAM</h4>
+            </div>
 
             <!-- Botón de impresión -->
             <div class="text-center mt-4">
