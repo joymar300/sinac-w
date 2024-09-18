@@ -2,45 +2,8 @@
 <form action="/grado" method="POST" class="container pt-3 col-md-7 col-lg-8">
   <h3 class="fs-1" style="margin-left: 450px;">Registrar grado</h3>
   <div style="width: 600px; margin-left: 270px;">
-      <div class="mb-3">
-    <!-- Button trigger modal -->
-      <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <span class="btn-label"><i class="fa fa-info-circle"></i></span>
-      </button>
-  <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Nomenclatura</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              La nomenclatura del grado debe tener un máximo de 3 caracteres, de los cuales los primeros dos tienen que ser numero para establecer el grado y el último una letra en mayúscula para la sección.
-              Ejemplos: <br>
-
-              10A para decimo A, <br>
-              8B para octavo B, <br>
-              7C para septimo C, <br>
-              11B para onceavo B. <br>
-
-              <hr>
-
-              Para pre-escolar (Si hay), tiene que ser ocupado por una (1) letra en mayúscula y un (1) número, ésta nomenclatura solamente se aplicara para pre-escolar. 
-              Ejemplos: <br>
-
-              P1 para sección una, <br>
-              P2 para sección dos.
-
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <label for="" class="form-label pb-3">Registrar grado</label>
-      <input name="grado" type="text" class="form-control mb-3" id="" maxlength="3" placeholder="10A" required>
+    <div class="mb-3">
+      <input name="grado" type="text" class="form-control mb-3" id="" maxlength="20" placeholder="Nombre" required>
     </div>
   </div>
   <button type="submit" class="btn btn-primary mb" style="margin-left: 550px;">Registrar</button>
