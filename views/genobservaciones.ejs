@@ -1,10 +1,10 @@
 <%- include('panelNavBar.ejs'); %>
-<form action="" method="POST" class="container pt-3 col-md-7 col-lg-8">
+<form action="/genObservacion" method="POST" class="container pt-3 col-md-7 col-lg-8">
     <div class="form-control">
       <h3>Generar Observaciones</h3>
       <div class="mb-3">
-       <label for="" class="form-label pb-3">Cedula de estudiante:</label>
-        <input name="cedula" type="text" class="form-control mb-3" id="" required>
+       <label for="" class="form-label pb-3">identificaión de estudiante:</label>
+        <input name="idEstudiante" type="text" class="form-control mb-3" id="" required>
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Seleccione el periodo:</label>
@@ -14,6 +14,9 @@
           <option value="2">Periodo 2</option>
           <option value="3">Periodo 3</option>
         </select>
+      </div>
+      <div class="mb-3" ></div>
+        <input name="cedula" value="<%= locals.id %>" hidden > </input>
       </div>
       <div class="mb-3">
         <label for="" class="form-label pb-3">comentario:</label>
