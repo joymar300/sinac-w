@@ -1,4 +1,4 @@
-#Sistema COL-SOFT
+#Sistema SINAC
 
 Sistema en nube para colegios con el objetivo de la automatización de matricula de estudiantes y  registro de notas por periodos.
 
