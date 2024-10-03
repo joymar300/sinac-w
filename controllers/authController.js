@@ -737,8 +737,9 @@ exports.generarDes = async (req,res)=>{
         const periodo = req.body.periodo;
         const cedula = req.body.cedula;
         const comentario = req.body.comentario;
+        const materia= req.body.materia
 
-        conexion.query('INSERT INTO desempeno SET ? ', { comentario:comentario, docente_id:cedula,idGrado:grado, idPeriodo:periodo}, (error, results)=>{
+        conexion.query('INSERT INTO desempeno SET ? ', { comentario:comentario, docente_id:cedula,idGrado:grado, idPeriodo:periodo, id_materia:materia }, (error, results)=>{
             if (error) {console.log(error)}
             else{
 
@@ -803,9 +804,10 @@ exports.consultarDespeno = async (req, res) => {
 
         // Consulta SQL corregida
         conexion.query(
-            `SELECT DISTINCT comentario 
+            `SELECT DISTINCT comentario, matNombre 
             FROM desempeno AS d 
             JOIN grupo gru ON d.idGrado = gru.Grado_idGrado 
+            JOIN materia m ON d.id_materia = m.idMateria
             WHERE gru.Estudiante_Usuario_id = ? 
             AND d.idPeriodo = ?`,
             [id, periodo],

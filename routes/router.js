@@ -183,7 +183,14 @@ router.get('/desempeno', (req, res) =>{
         if (error){
             throw error
         }else{
-            res.render('desempeno', {results:results})
+            conexion.query('SELECT * FROM materia', (error, materia) =>{
+                if (error){
+                    throw error
+                }else{
+                    res.render('desempeno', {results:results, materia:materia})
+                }
+            })
+       
         }
     })
  
