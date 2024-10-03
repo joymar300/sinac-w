@@ -120,7 +120,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Materia</th>
-                        <th scope="col">Nota del Promedio</th>
+                        
                         <th scope="col">Valor del Promedio</th>
                         <th scope="col">Periodo</th>
                     </tr>
@@ -129,7 +129,7 @@
                     <% notas.forEach((notas) => { %>
                     <tr>
                         <th scope="row"><%= notas.matNombre %></th>
-                        <td><%= notas.promedio %></td>
+                        
                         <td>
                             <% if (notas.promedio <= 3.0 && notas.promedio > 1.0) { %> 
                                 Bajo
