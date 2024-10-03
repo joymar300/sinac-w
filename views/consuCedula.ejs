@@ -1,10 +1,35 @@
 <%- include('panelNavBar.ejs'); %>
 <form action="/consulta" method="POST" class="container pt-3 col-md-7 col-lg-8">
+  <% if(locals.idRol === 4){%>
+
+    <h3 class="fs-1" style="margin-left: 370px;" >Consultar Datos</h3>
+    <div style="width: 600px; margin-left: 250px;">
+      <div class="mb-3">
+       <label for="" class="form-label pb-3" hidden>Cedula del Usuario:</label>
+        <input name="cedula" type="text" class="form-control mb-3" value="<%= locals.cedula %>" id="" required hidden>
+      </div>
+      <label for="" class="form-label">Datos a consultar:</label><br>
+      <div class="form-check form-check-inline mt-3">
+        <input class="form-check-input" type="radio" name="tipo" value="datos">
+        <label class="form-check-label">Datos Personales</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="tipo" value="notas">
+        <label class="form-check-label">Notas</label>
+      </div>
+      <div class="mb-3">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mb" style="margin-left: 500px;">Consultar</button>
+  
+  
+  <% }else{ %>
+
   <h3 class="fs-1" style="margin-left: 370px;">Consultar Estudiante</h3>
   <div style="width: 600px; margin-left: 250px;">
     <div class="mb-3">
      <label for="" class="form-label pb-3">Cedula del Usuario:</label>
-      <input name="cedula" type="text" class="form-control mb-3" id="" required>
+      <input name="cedula" type="text" class="form-control mb-3" value="<%= locals.cedula %>" id="" required>
     </div>
     <label for="" class="form-label">Datos a consultar:</label><br>
     <div class="form-check form-check-inline mt-3">
@@ -19,6 +44,7 @@
     </div>
   </div>
   <button type="submit" class="btn btn-primary mb" style="margin-left: 500px;">Consultar</button>
+  <% } %>
 </form>
 
 

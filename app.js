@@ -68,14 +68,15 @@
      if (req.cookies.jwt) {
          try {
              const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO);
-             conexion.query('SELECT idRol, id  FROM usuario as u, rol as r WHERE r.idRol = u.Rol_idRol AND id = ?', [decoded.id], (error, results) => {
+             conexion.query('SELECT idRol, id, usuCedula  FROM usuario as u, rol as r WHERE r.idRol = u.Rol_idRol AND id = ?', [decoded.id], (error, results) => {
                  if (error) {
                      console.error('Error en la consulta de usuario:', error);
                      return next();
                  }
                  res.locals.idRol = results[0]?.idRol || null;
                  res.locals.id = results[0]?.id || null;
-                 console.log("ide ro dwdas ", res.locals.idRol, "cedula", res.locals.id, )
+                 res.locals.cedula = results[0]?.usuCedula || null;
+                 console.log("ide ro dwdas ", res.locals.idRol, "id", res.locals.id, "cedula:",res.locals.cedula )
                  next();
              });
          } catch (error) {

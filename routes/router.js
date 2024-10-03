@@ -16,7 +16,7 @@ const { error } = require('console')
 
 //ROUTER para las vistas GET
 router.get('/', (req, res) => {
-    res.render('index')
+    res.render('login', {alert:false})
 })
 router.get('/login', (req, res) => {
     res.render('login', {alert:false})
