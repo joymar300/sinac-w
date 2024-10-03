@@ -1,6 +1,7 @@
 <%- include('panelNavBar.ejs'); %>
 
-<div class="d-flex" style="width: 1771px; height: 700px;">
+<div style="background-image: url(../img/fondo_1.png); background-size: 100%;">
+<div class="d-flex" style="width: 100%; height: 700px;">
   <div style="width: 700px; margin-top: 150px; margin-left: 100px;">
     <h1 style="font-size: 70px; width: 780px; font-family: mf; font-weight: m;">
       ¡Bienvenidos al sistema de<br>
@@ -14,8 +15,11 @@
   </div>
   <img style="width: 1000px; height: 700px; margin-top: 40px; margin-right: 0px;" src="img/fray.png">
 </div>
+<div style="width:100%"><img src="img/dvva.png" width="100%"></div>
+</div>
 
-<div class="d-flex" style="width: 1721px; height: 700px; margin-left: 70px;">
+<div style="background-image: url(../img/fondo_3.png); background-size: 100%; height: 102.5%;">
+<div class="d-flex" style="width: 1721px; height: 700px; margin-left: 70px">
   <img src="img/bg.gif">
   <div style="width: 750px; margin-top: 150px; margin-left: 150px;">
     <h1 style="font-size: 70px; width: 780px; font-family: mf; font-weight: m;">
@@ -31,9 +35,12 @@
     </p>
   </div>
 </div>
+</div>
 
-<div class="d-flex" style="width: 1771px; height: 700px;">
-  <div style="width: 700px; margin-top: 150px; margin-left: 100px;">
+<div style="background-image: url(../img/fondo_2.png); background-size: 100%;">
+<div style="width: 100%; margin-bottom: 30px;"><img src="img/dvvb.png" width="100%"></div>
+<div class="d-flex" style="width: 1771px; height: 600px;">
+  <div style="width: 630px; margin-top: 150px; margin-left: 130px;">
     <h1 style="font-size: 70px; width: 780px; font-family: mf; font-weight: m;">
       Tutorial
     </h1>
@@ -43,18 +50,20 @@
       pagina la funcion de cada seccion de está
     </p>
   </div>
-  <div style="width:950px; height: 560px; background-color:#ce285a; border-radius: 50px;">
+  <div style="width:900px; height: 510px; background-color:#ce285a; border-radius: 50px;">
     <% if(locals.idRol === 1){%>
-      <video src="videos/video1.mp4" width="880px" height="500px" controls style="border-radius: 50px; margin-top: 30px; margin-left: 37px;">Tu navegador no admite el elemento <code>video</code>.</video>
+      <video src="videos/video1.mp4" width="830px" height="450px" controls style="border-radius: 50px; margin-top: 30px; margin-left: 37px;">Tu navegador no admite el elemento <code>video</code>.</video>
       <%} else if(locals.idRol === 3){ %>
-        <video src="videos/video2.mp4" width="880px" height="500px" controls style="border-radius: 50px; margin-top: 30px; margin-left: 37px;">Tu navegador no admite el elemento <code>video</code>.</video>
+        <video src="videos/video2.mp4" width="830px" height="450px" controls style="border-radius: 50px; margin-top: 30px; margin-left: 37px;">Tu navegador no admite el elemento <code>video</code>.</video>
         <%} else if(locals.idRol === 4){ %>
-          <video src="videos/video3.mp4" width="880px" height="500px" controls style="border-radius: 50px; margin-top: 30px; margin-left: 37px;">Tu navegador no admite el elemento <code>video</code>.</video>
+          <video src="videos/video3.mp4" width="830px" height="450px" controls style="border-radius: 50px; margin-top: 30px; margin-left: 37px;">Tu navegador no admite el elemento <code>video</code>.</video>
     <% } %>
     </div>
 </div>
+<div style="width: 100%;"><img src="svg/dvs.svg" width="100%"></div>
+</div>
 
-<div style="height: 800px;">
+<div style="height: 800px; background-color: #ce285a;">
   <div id="carouselExample" class="carousel slide" style="width: 1500px; height: 700px; overflow: hidden; margin-left: 140px; margin-bottom: 100px; border-radius: 50px;">
     <div class="carousel-inner">
       <div class="carousel-item active">
