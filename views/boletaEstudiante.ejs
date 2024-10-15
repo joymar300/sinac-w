@@ -14,8 +14,25 @@
     
     <!-- Estilos personalizados para el boletín -->
     <style>
+
+        @font-face {
+        font-family: 'mf';
+        src: url(../fonts/Comfy\ Feeling.otf);
+        font-weight: m;
+        font-style: m;
+        }
+
+        @font-face {
+        font-family: 'fm';
+        src: url(../fonts/LeagueSpartan-Bold.otf);
+        font-weight: t;
+        font-style: t;
+        }
+
         body {
             font-family: 'Lato', sans-serif;
+            background-image:  url(../img/fnpf.png);
+            background-size: 100%;
         }
 
         .boletin-container {
@@ -25,6 +42,10 @@
             border: 1px solid #ddd;
             background-color: #f9f9f9;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        img{
+            width: 30px;
         }
 
         .header {
@@ -44,21 +65,29 @@
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 5px;
+            font-family: fm;
+            font-weight: t;
         }
 
         .header h4 {
             font-weight: normal;
             color: #555;
+            font-family: fm;
+            font-weight: t;
         }
 
         h3 {
             margin-top: 20px;
             font-size: 1.5rem;
+            font-family: mf;
+            font-weight: m;
         }
 
         .table thead th {
             background-color: #007bff;
             color: #fff;
+            font-family: fm;
+            font-weight: t;
         }
 
         .table tbody tr:nth-child(even) {
@@ -76,6 +105,8 @@
         @media print {
             body {
                 background-color: #fff;
+                background-image:  url(../img/fnpf.png);
+                background-size: 100%;
             }
 
             .boletin-container {
@@ -106,7 +137,7 @@
 <body>
     <div class="boletin-container">
         <div class="header">
-            <img src="img/COLSAM_Logo.webp" alt="Escudo Institucional">
+            <img src="img/escudocolsam.png" alt="Escudo Institucional">
             <h1>Boleta de Calificaciones</h1>
             <h4>Instituto COLSAM</h4>
         </div>
@@ -128,28 +159,31 @@
                 <tbody>
                     <% notas.forEach((notas) => { %>
                     <tr>
-                        <th scope="row"><%= notas.matNombre %></th>
-                        
+                        <th scope="row" style="font-family: mf; font-weight: m"><%= notas.matNombre %></th>
+
+                        <td><%= notas.perNombre %></td>
+
                         <td>
                             <% if (notas.promedio <= 3.0 && notas.promedio > 1.0) { %> 
-                                Bajo
+                                <img src="img/sb.png">
                             <% } else if (notas.promedio >= 3.1 && notas.promedio <= 3.9) { %> 
-                                Básico
+                                <img src="img/sbc.png">
                             <% } else if (notas.promedio >= 4.0 && notas.promedio <= 4.9) { %> 
-                                Alto
+                                <img src="img/sa.png">
                             <% } else if (notas.promedio > 5.0) { %> 
-                                Superior
+                                <img src="img/ss.png">
                             <% } %>
                         </td>
-                        
-                        <td><%= notas.perNombre %></td>
                     </tr> 
                     <% }) %>
                 </tbody>
             </table>
 
             <div class="footer">
-                <h4>Documento generado mediante el sistema SINAC-W del instituto COLSAM</h4>
+                <img src="img/sb.png">
+                <img src="img/sbc.png">
+                <img src="img/sa.png">
+                <img src="img/ss.png">
             </div>
 
             <!-- Botón de impresión -->
