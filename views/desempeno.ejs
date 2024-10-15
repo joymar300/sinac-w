@@ -16,15 +16,21 @@
           <% }) %>
         </select>
       </div>
+      <label for="dimension" class="form-label mb-3">Seleccione la dimensión:</label>
+      <select id="dimensionSelect" name="dimension" class="form-select" aria-label="Default select example">
+        <option selected disabled>Dimensión</option>
+        <% dimension.forEach((di) => { %>
+          <option value="<%= di.id_dim %>"><%= di.claseM %></option>
+        <% }) %>
+      </select>
+  
       <div class="mb-3">
-
-        <select name="materia" class="form-select" aria-label="Default select example">
+        <label for="materia" class="form-label mb-3">Seleccione la materia:</label>
+        <select id="materiaSelect" name="materia" class="form-select" aria-label="Default select example" disabled>
           <option selected disabled>Materia</option>
-          <% materia.forEach((materia) => { %>
-            <option value="<%= materia.idMateria %>"><%= materia.matNombre %></option>
-          <% }) %>
         </select>
       </div>
+  
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Seleccione el periodo:</label>
         <select name="periodo" class="form-select" aria-label="Default select example">
@@ -46,3 +52,23 @@
     </div>
   </form>
 </div>
+
+<script>
+  // Detectar cambio en el selector de dimensión
+  document.getElementById('dimensionSelect').addEventListener('change', function() {
+    const dimensionId = this.value;
+  
+    // Realizar solicitud AJAX
+    fetch(`/materias/${dimensionId}`)
+      .then(response => response.json())
+      .then(data => {
+        const materiaSelect = document.getElementById('materiaSelect');
+        materiaSelect.innerHTML = '<option selected disabled>Materia</option>'; // Limpiar opciones
+        data.forEach(materia => {
+          materiaSelect.innerHTML += `<option value="${materia.idMateria}">${materia.matNombre}</option>`;
+        });
+        materiaSelect.disabled = false; // Habilitar el selector
+      })
+      .catch(error => console.error('Error:', error));
+  });
+  </script>
