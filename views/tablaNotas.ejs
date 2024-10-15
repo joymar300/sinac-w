@@ -4,222 +4,88 @@
     <h3>Grado: <%= place.graNombre %>, Materia: <%= place.matNombre %>, Periodo: <%= place.perNombre %></h3>
   <%  %>
   <div class="row justify-content-md-center">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Cedula</th>
-          <th scope="col">Nombres</th>
-          <th scope="col">Apellidos</th>
-          <th scope="col">Acción</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% results.forEach((usuario) => { %>
-        <tr>
-          <th scope="row"><%= usuario.usuCedula %></th>
-          <td><%= usuario.usuNombre %> <%= usuario.usuNombre2 %></td>
-          <td><%= usuario.usuApellidoP %> <%= usuario.usuApellidoM %></td>
-          <td><!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%= usuario.id %>">
-                <span class="btn-label"><i class="fa fa-pencil"></i></span>
-            </button>
-            
-            <!-- Modal -->
-            <form action="/update" method="POST">
-              <input id="" name="id" type="hidden" value="<%= usuario.id %>">
-              <input id="" name="materia" type="hidden" value="<%= usuario.idMateria %>">
-              <input id="" name="periodo" type="hidden" value="<%= usuario.idPeriodo %>">
-            <div class="modal fade" id="exampleModal<%= usuario.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Evaluaciones</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 1</label>
-                        <select name="eva1" class="form-select" aria-label="Default select example">
-                          <option selected value="<%= usuario.eva1 %>" >
-                            
-                            <% if (usuario.eva1 == 2.0) { %> Bajo
-                              <% } else if (usuario.eva1 == 3.1) { %> básico
-                              <% } else if (usuario.eva1 == 4.0) { %> alto
-                              <% } else if (usuario.eva1 == 5.0) { %> superior
-                              <% } %>
-                          </option>
-                           <option value="2.0">Bajo</option>
-                           <option value="3.1">básico</option>
-                           <option value="4.0">alto</option>
-                           <option value="5.0">superior</option>
-                         </select>
-                        <!-- <input name="eva1" value="<%= usuario.eva1 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 2</label>
-                        <select name="eva2" class="form-select" aria-label="Default select example">
-                          <option selected value="<%= usuario.eva2 %>">
-                            <% if (usuario.eva2 == 2.0) { %> Bajo
-                              <% } else if (usuario.eva2 == 3.1) { %> básico
-                              <% } else if (usuario.eva2 == 4.0) { %> alto
-                              <% } else if (usuario.eva2 == 5.0) { %> superior
-                              <% } %>
-
-                          </option>
-                           <option value="2.0">Bajo</option>
-                           <option value="3.1">básico</option>
-                           <option value="4.0">alto</option>
-                           <option value="5.0">superior</option>
-                         </select>
-                        <!-- <input name="eva2" value="<%= usuario.eva2 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 3</label>
-                        <select name="eva3" class="form-select" aria-label="Default select example">
-                          <option selected  value="<%= usuario.eva3 %>">
-                            <% if (usuario.eva3 == 2.0) { %> Bajo
-                              <% } else if (usuario.eva3 == 3.1) { %> básico
-                              <% } else if (usuario.eva3 == 4.0) { %> alto
-                              <% } else if (usuario.eva3 == 5.0) { %> superior
-                              <% } %>
-                          
-                          
-                          </option>
-                           <option value="2.0">Bajo</option>
-                           <option value="3.1">básico</option>
-                           <option value="4.0">alto</option>
-                           <option value="5.0">superior</option>
-                         </select>
-                        <!-- <input name="eva3" value="<%= usuario.eva3 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
-                    </div>
-                    <div class="mb-3">
-
-                        <label for="" class="form-label">Evaluación 4</label>
-                        <select name="eva4" class="form-select" aria-label="Default select example">
-                          <option selected value="<%= usuario.eva4 %>">
-                            <% if (usuario.eva4 == 2.0) { %> Bajo
-                              <% } else if (usuario.eva4 == 3.1) { %> básico
-                              <% } else if (usuario.eva4 == 4.0) { %> alto
-                              <% } else if (usuario.eva4 == 5.0) { %> superior
-                              <% } %>
-
-                          </option>
-                           <option value="2.0">Bajo</option>
-                           <option value="3.1">básico</option>
-                           <option value="4.0">alto</option>
-                           <option value="5.0">superior</option>
-                         </select>
-                        <!-- <input name="eva4" value="<%= usuario.eva4 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 5</label>
-                        <select name="eva5" class="form-select" aria-label="Default select example">
-                          <option selected value="<%= usuario.eva5 %>">
-
-                            <% if (usuario.eva5 == 2.0) { %> Bajo
-                              <% } else if (usuario.eva5 == 3.1) { %> básico
-                              <% } else if (usuario.eva5 == 4.0) { %> alto
-                              <% } else if (usuario.eva5 == 5.0) { %> superior
-                              <% } %>
-                          </option>
-                           <option value="2.0">Bajo</option>
-                           <option value="3.1">básico</option>
-                           <option value="4.0">alto</option>
-                           <option value="5.0">superior</option>
-                         </select>
-                        <!-- <input name="eva5" value="<%= usuario.eva5 %>" type="number" step="0.1" class="form-control" id="" max="5"> -->
-                    </div>
-                    <!-- <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 6</label>
-                        <input name="eva6" value="<%= usuario.eva6 %>" type="number" step="0.1" class="form-control" id="" max="5">
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 7</label>
-                        <input name="eva7" value="<%= usuario.eva7 %>" type="number" step="0.1" class="form-control" id="" max="5">
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 8</label>
-                        <input name="eva8" value="<%= usuario.eva8 %>" type="number" step="0.1" class="form-control" id="" max="5">
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 9</label>
-                        <input name="eva9" value="<%= usuario.eva9 %>" type="number" step="0.1" class="form-control" id="" max="5">
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Evaluación 10</label>
-                        <input name="eva10" value="<%= usuario.eva10 %>" type="number" step="0.1" class="form-control" id="" max="5">
-                   </div> -->
-                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                  </div>
-                  </div>
-
-                </div>
-              </div>
-            </div></td>
-          </form>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
-
+    <form action="/update" method="POST">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Cédula</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <% for (let i = 1; i <= 10; i++) { %>
+              <% if (results[0]['eva' + i] !== null) { %>
+                <th scope="col">Evaluación <%= i %></th>
+              <% } %>
+            <% } %>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% results.forEach((usuario) => { %>
+            <input id="" name="id" type="hidden" value="<%= usuario.id %>">
+            <input id="" name="materia" type="hidden" value="<%= usuario.idMateria %>">
+            <input id="" name="periodo" type="hidden" value="<%= usuario.idPeriodo %>">
+            <tr>
+              <th scope="row"><%= usuario.usuCedula %></th>
+              <td><%= usuario.usuNombre %> <%= usuario.usuNombre2 %></td>
+              <td><%= usuario.usuApellidoP %> <%= usuario.usuApellidoM %></td>
+              <% for (let i = 1; i <= 10; i++) { %>
+                <% if (usuario['eva' + i] !== null) { %>
+                  <td>
+                    <select name="eva<%= i %>_<%= usuario.id %>" class="form-select">
+                      <option value="2.0" <%= usuario['eva' + i] == 2.0 ? 'selected' : '' %>>Bajo</option>
+                      <option value="3.1" <%= usuario['eva' + i] == 3.1 ? 'selected' : '' %>>Básico</option>
+                      <option value="4.0" <%= usuario['eva' + i] == 4.0 ? 'selected' : '' %>>Alto</option>
+                      <option value="5.0" <%= usuario['eva' + i] == 5.0 ? 'selected' : '' %>>Superior</option>
+                    </select>
+                  </td>
+                <% } %>
+              <% } %>
+              <td>
+                <button type="button" class="btn btn-secondary add-eval-btn" data-id="<%= usuario.id %>">Agregar Evaluación</button>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary">Guardar todas las evaluaciones</button>
+      </div>
+    </form>
   </div>
-
 </div>
 
-</main>
-
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script>document.title = 'Tabla de estudiantes'</script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
-  // Manejo del formulario con fetch y SweetAlert
-  document.querySelectorAll('form').forEach(form => {
-      form.addEventListener('submit', async function (e) {
-          e.preventDefault();
-          
-          const formData = new FormData(this);
+  // Botón para agregar evaluaciones dinámicamente hasta eva10
+  document.querySelectorAll('.add-eval-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const userId = this.dataset.id;
+      const row = this.closest('tr');
+      let nextEva = 1;
 
-          try {
-              const response = await fetch('/update', {
-                  method: 'POST',
-                  body: formData
-              });
+      // Verificar cuál es la próxima evaluación disponible
+      for (let i = 1; i <= 10; i++) {
+        if (!row.querySelector(`[name="eva${i}_${userId}"]`)) {
+          nextEva = i;
+          break;
+        }
+      }
 
-              const result = await response.json();
-
-              if (result.success) {
-                  Swal.fire({
-                      icon: 'success',
-                      title: '¡Hecho!',
-                      text: result.message,
-                      confirmButtonText: 'Ok'
-                  }).then(() => {
-                      // Opcional: recargar la página o redirigir
-                      location.reload();
-                  });
-              } else {
-                  Swal.fire({
-                      icon: 'error',
-                      title: 'Error',
-                      text: result.message,
-                      confirmButtonText: 'Ok'
-                  });
-              }
-          } catch (error) {
-              Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'Hubo un problema con la solicitud',
-                  confirmButtonText: 'Ok'
-              });
-          }
-      });
+      if (nextEva <= 10) {
+        const cell = document.createElement('td');
+        cell.innerHTML = `
+          <select name="eva${nextEva}_${userId}" class="form-select">
+            <option value="2.0">Bajo</option>
+            <option value="3.1">Básico</option>
+            <option value="4.0">Alto</option>
+            <option value="5.0">Superior</option>
+          </select>
+        `;
+        row.insertBefore(cell, row.lastElementChild);
+      } else {
+        alert('Ya se han agregado todas las evaluaciones.');
+      }
+    });
   });
-</script> -->
+</script>
 
-<!-- <script src="../js/sidebars.js"></script> -->
-</body>
-</html>
+<script>document.title = 'Tabla de estudiantes'</script>

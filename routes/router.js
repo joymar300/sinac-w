@@ -88,21 +88,37 @@ router.get('/materia', (req, res) => {
 })
 
 router.get('/notas', (req, res) => {
-    conexion.query('SELECT * FROM grado ORDER BY graNombre ASC', (error, results) => {
+    conexion.query('SELECT * FROM grado  ORDER BY graNombre ASC', (error, results) => {
         if (error){
             throw error
         }else{
-            conexion.query('SELECT * FROM materia', (error, materia) =>{
+            conexion.query('SELECT *,claseM FROM materia as m join dimension as d where m.id_dim=d.id_dim', (error, materia) =>{
                 if (error){
                     throw error
                 }else{
-                    res.render('regNotas', {results:results, materia:materia, alert:false})
+                    conexion.query('SELECT * FROM dimension', (error, dimension) =>{
+
+                        res.render('regNotas', {results:results, materia:materia,dimension:dimension, alert:false})
+                    })
                 }
             })
         }
     })
 
 })
+
+// Ruta para obtener las materias por dimensión
+router.get('/materias/:dimensionId', (req, res) => {
+    const dimensionId = req.params.dimensionId;
+
+    conexion.query('SELECT * FROM materia WHERE id_dim = ?', [dimensionId], (error, materias) => {
+        if (error) {
+            return res.status(500).json({ error: 'Error al obtener las materias' });
+        }
+        res.json(materias); // Devolver materias en formato JSON
+    });
+});
+
 
 //CALCULO DE PORCENTAJES
 router.get('/calcular', (req, res) => {
@@ -187,7 +203,10 @@ router.get('/desempeno', (req, res) =>{
                 if (error){
                     throw error
                 }else{
-                    res.render('desempeno', {results:results, materia:materia})
+                    conexion.query('SELECT * FROM dimension', (error, dimension) =>{
+
+                        res.render('desempeno', {results:results, materia:materia, dimension:dimension})
+                    })
                 }
             })
        

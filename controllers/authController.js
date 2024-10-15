@@ -332,56 +332,149 @@ exports.docente = (req, res) =>{
 
 }
 
+// exports.update = async (req, res) => {
+//     try {
+//         const id = req.body.id
+//         const materia = req.body.materia
+//         const periodo = req.body.periodo
+//         const eva1 = req.body.eva1
+//         const eva2 = req.body.eva2
+//         const eva3 = req.body.eva3
+//         const eva4 = req.body.eva4
+//         const eva5 = req.body.eva5
+//         const eva6 = req.body.eva6
+//         const eva7 = req.body.eva7
+//         const eva8 = req.body.eva8
+//         const eva9 = req.body.eva9
+//         const eva10 = req.body.eva10
+    
+//         //console.log(id, materia, periodo, eva1)
+    
+//         conexion.query('UPDATE evaluaciones SET eva1 = ?, eva2 = ?, eva3 = ?, eva4 = ?, eva5 = ?, eva6 = ?, eva7 = ?, eva8 = ?, eva9 = ?, eva10 = ? WHERE Estudiante_Usuario_id = ? AND Materia_idMateria = ? AND Periodo_idPeriodo = ?', [eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, id, materia, periodo], (error, results) =>{
+//                // Log para verificar los datos
+//             console.log('Datos recibidos:', req.body);
+//             if (error) {
+//                 console.log(error);
+//                 res.send({ success: false, message: 'Error al actualizar las notas' });
+//             } else {
+//                // res.send({ success: true, message: 'Las notas han sido actualizadas con éxito' });
+//             }
+            
+//             //if (error){console.log(error)}
+//             // res.render('blank', {
+//             //     alert:true,
+//             //     alertTitle: 'Notas actualizadas',
+//             //     alertMessage: 'Las notas han sido actualizadas con éxito',
+//             //     alertIcon: 'success',
+//             //     showConfirmButton: true,
+//             //     timer: false,
+//             //     ruta: 'notas'
+//             // })
+//         })
+//         const decodificada = await (promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO))
+//         const userID = decodificada.id
+//         let action = 'El usuario con ID: ' +userID+ ' ha actualizado notas'
+//         conexion.query('INSERT INTO eventos SET ?', {accion:action}, (error, results) =>{
+//             if (error){console.log(error)}
+//         } )
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
 exports.update = async (req, res) => {
     try {
-        const id = req.body.id
-        const materia = req.body.materia
-        const periodo = req.body.periodo
-        const eva1 = req.body.eva1
-        const eva2 = req.body.eva2
-        const eva3 = req.body.eva3
-        const eva4 = req.body.eva4
-        const eva5 = req.body.eva5
-        const eva6 = req.body.eva6
-        const eva7 = req.body.eva7
-        const eva8 = req.body.eva8
-        const eva9 = req.body.eva9
-        const eva10 = req.body.eva10
-    
-        //console.log(id, materia, periodo, eva1)
-    
-        conexion.query('UPDATE evaluaciones SET eva1 = ?, eva2 = ?, eva3 = ?, eva4 = ?, eva5 = ?, eva6 = ?, eva7 = ?, eva8 = ?, eva9 = ?, eva10 = ? WHERE Estudiante_Usuario_id = ? AND Materia_idMateria = ? AND Periodo_idPeriodo = ?', [eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, id, materia, periodo], (error, results) =>{
-               // Log para verificar los datos
-            console.log('Datos recibidos:', req.body);
-            if (error) {
-                console.log(error);
-                res.send({ success: false, message: 'Error al actualizar las notas' });
-            } else {
-               // res.send({ success: true, message: 'Las notas han sido actualizadas con éxito' });
-            }
-            
-            //if (error){console.log(error)}
-            // res.render('blank', {
-            //     alert:true,
-            //     alertTitle: 'Notas actualizadas',
-            //     alertMessage: 'Las notas han sido actualizadas con éxito',
-            //     alertIcon: 'success',
-            //     showConfirmButton: true,
-            //     timer: false,
-            //     ruta: 'notas'
-            // })
-        })
-        const decodificada = await (promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO))
-        const userID = decodificada.id
-        let action = 'El usuario con ID: ' +userID+ ' ha actualizado notas'
-        conexion.query('INSERT INTO eventos SET ?', {accion:action}, (error, results) =>{
-            if (error){console.log(error)}
-        } )
-    } catch (error) {
-        console.log(error)
-    }
-}
+      const data = req.body; // Aquí están todos los datos de evaluaciones enviados
+      const updates = [];
+      const materia = req.body.materia
+      const periodo = req.body.periodo
+      Object.keys(data).forEach((key) => {
+        // Cada clave del formulario está en formato eva{n}_{id}
+        const [evaluation, userId] = key.split('_');
+        const evalNumber = evaluation.replace('eva', '');
+        const evalValue = data[key];
+  
+        // Solo procesar si la evaluación está dentro de 1 a 10
+        if (evalNumber >= 1 && evalNumber <= 10) {
+          const materia = req.body.materia[0];
+          const periodo = req.body.periodo[0];
+          updates.push({ userId, evalNumber, evalValue, materia, periodo });
+        }
+      });
+  
+      // Recorrer cada actualización y actualizar la base de datos
+      updates.forEach(update => {
+       consulta= conexion.query(
+          `UPDATE evaluaciones SET eva${update.evalNumber} = ? WHERE Estudiante_Usuario_id = ? AND Materia_idMateria = ? AND Periodo_idPeriodo = ?`,
+          [update.evalValue, update.userId, update.materia, update.periodo],
+          (error, results) => {
+            if (error) console.log(error);
+          
+          }
+        );
 
+    
+      });
+  
+      res.send({ success: true, message: 'Las evaluaciones han sido actualizadas con éxito' });
+    } catch (error) {
+      console.log(error);
+      res.send({ success: false, message: 'Error al actualizar las evaluaciones' });
+    }
+  };
+  
+
+
+// exports.consulta = async (req, res) => {
+//     try {
+//         const cedulaInput = req.body.cedula
+//         const tipo = req.body.tipo
+//         const decodificada = await (promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO))
+//         conexion.query('SELECT * FROM usuario WHERE id = ?', [decodificada.id], (error, results) => {
+//             const cedulaDB = results[0].usuCedula
+//             const rol = results[0].Rol_idRol
+//             if (rol == 4){
+//                 if (cedulaInput != cedulaDB){
+//                     res.render('blank', {
+//                         alert:true,
+//                         alertTitle: 'Consulta inválida',
+//                         alertMessage: 'Solo puede consultar su información',
+//                         alertIcon: 'error',
+//                         showConfirmButton: true,
+//                         timer: false,
+//                         ruta: 'consulta'
+//                     })
+//                 }else{
+//                     if (tipo == 'datos') {
+//                         conexion.query ('SELECT * FROM usuario WHERE usuCedula = ?', [cedulaInput], (error, results) =>{
+//                             res.render('consuUsuario', {usuario:results})
+//                         })
+                        
+//                     }else{
+//                         conexion.query('SELECT DISTINCT usuNombre, usuApellidoP, usuApellidoM, matNombre, perNombre, eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, promedio FROM usuario AS U, evaluaciones AS E, materia AS M, periodo AS P, grupo AS G, grado AS S WHERE U.id = E.Estudiante_Usuario_id AND M.idMateria = E.Materia_idMateria AND G.Grado_idGrado = S.idGrado AND P.idPeriodo = E.Periodo_idPeriodo AND E.Periodo_idPeriodo = P.idPeriodo AND usuCedula = ? ORDER BY perNombre', [cedulaInput], (error, results) =>{
+//                             const ubica = results[0] 
+//                             res.render('consuNotas', {notas:results, place:ubica})
+//                         })
+//                     }
+//                 }
+//             }else{
+//                 if (tipo == 'datos') {
+//                     conexion.query ('SELECT * FROM usuario WHERE usuCedula = ?', [cedulaInput], (error, results) =>{
+//                         res.render('consuUsuario', {usuario:results})
+//                     })
+                    
+//                 }else{
+//                     conexion.query('SELECT DISTINCT usuNombre, usuApellidoP, usuApellidoM, matNombre, perNombre, eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, promedio FROM usuario AS U, evaluaciones AS E, materia AS M, periodo AS P, grupo AS G, grado AS S WHERE U.id = E.Estudiante_Usuario_id AND M.idMateria = E.Materia_idMateria AND G.Grado_idGrado = S.idGrado AND P.idPeriodo = E.Periodo_idPeriodo AND E.Periodo_idPeriodo = P.idPeriodo AND usuCedula = ? ORDER BY perNombre', [cedulaInput], (error, results) =>{
+//                         const ubica = results[0] 
+//                         res.render('consuNotas', {notas:results, place:ubica})
+//                     })
+//                 }
+//             }
+//         })
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 exports.consulta = async (req, res) => {
     try {
         const cedulaInput = req.body.cedula
