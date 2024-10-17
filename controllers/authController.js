@@ -225,7 +225,7 @@ exports.boletin = (req, res) => {
     const periodo = req.body.periodo
     const cedula = req.body.cedula
     //console.log(grado, materia, periodo, cedula)
-    conexion.query('SELECT DISTINCT usuNombre, usuApellidoP, usuApellidoM, matNombre, perNombre, eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, promedio FROM usuario AS U, evaluaciones AS E, materia AS M, periodo AS P, grupo AS G, grado AS S WHERE U.id = E.Estudiante_Usuario_id AND M.idMateria = E.Materia_idMateria AND G.Grado_idGrado = S.idGrado AND P.idPeriodo = E.Periodo_idPeriodo AND E.Periodo_idPeriodo = P.idPeriodo AND usuCedula = ? AND  E.Periodo_idPeriodo= ? ORDER BY perNombre ',[cedula,periodo], (error, results) =>{
+    conexion.query('SELECT DISTINCT usuNombre, usuApellidoP, usuApellidoM, matNombre, perNombre, eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, promedio,comentario FROM usuario AS U, evaluaciones AS E, materia AS M, periodo AS P, grupo AS G, grado AS S  join desempeno as D   on  M.idMateria= D.id_materia   WHERE U.id = E.Estudiante_Usuario_id AND M.idMateria = E.Materia_idMateria AND G.Grado_idGrado = S.idGrado AND P.idPeriodo = E.Periodo_idPeriodo AND E.Periodo_idPeriodo = P.idPeriodo AND usuCedula = ? AND  E.Periodo_idPeriodo= ? AND  D.idPeriodo= E.Periodo_idPeriodo AND D.idGrado=S.idGrado   ORDER BY perNombre ',[cedula,periodo], (error, results) =>{
         if (results.length == 0){
             res.render('blank', {
                 alert:true,

@@ -159,8 +159,27 @@ router.get('/boletin', (req, res) => {
 })
 
 router.get('/boletin_estudiante', (req, res) =>{
-    res.render('boleEstu')
+    conexion.query('SELECT * FROM grado', (error, result) => {
+        if (error) {
+          return res.status(500).send(error);
+        }else{
+
+            res.render('boleEstu', { results: result });
+        }
+    
+    })
 })
+router.get('/getEstudiantes/:gradoId', (req, res) => {
+    const gradoId = req.params.gradoId;
+  
+    // Query para obtener los estudiantes filtrados por el grado seleccionado
+    conexion.query('SELECT  DISTINCT usuCedula, usuNombre,usuNombre2,usuApellidoP, usuApellidoM FROM usuario as u join grupo as g WHERE g.Grado_idGrado = ?', [gradoId], (error, result) => {
+      if (error) {
+        return res.status(500).send(error);
+      }
+      res.json(result); // Devolver los estudiantes en formato JSON
+    });
+  });
 
 router.get('/boletin_grupo', (req, res) => {
     conexion.query('SELECT * FROM grado ORDER BY graNombre ASC', (error, results) => {

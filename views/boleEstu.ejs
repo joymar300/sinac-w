@@ -2,31 +2,63 @@
 <form action="/boletin" method="POST" class="container pt-3 col-md-7 col-lg-8">
   <div>
     <h3>Generar boletin</h3>
+
+    <!-- Select para Grado -->
     <div class="mb-3">
-     <label for="" class="form-label pb-3">Cedula de estudiante:</label>
-      <input name="cedula" type="text" class="form-control mb-3" id="" required>
+      <label for="grado" class="form-label pb-3">Seleccione el grado:</label>
+      <select name="grado" id="grado" class="form-select" required>
+        <option selected disabled>Grado</option>
+        <% results.forEach(function(grado){ %>
+          <option value="<%= grado.idGrado %>"><%= grado.graNombre %></option>
+        <% }); %>
+      </select>
     </div>
+
+    <!-- Select para Estudiantes, inicialmente deshabilitado -->
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Seleccione el periodo:</label>
-      <select name="periodo" class="form-select" aria-label="Default select example">
+      <label for="estudiante" class="form-label">Seleccione el estudiante:</label>
+      <select name="cedula" id="estudiante" class="form-select" disabled required>
+        <option selected disabled>Estudiante</option>
+      </select>
+    </div>
+
+    <!-- Select para el Periodo -->
+    <div class="mb-3">
+      <label for="periodo" class="form-label">Seleccione el periodo:</label>
+      <select name="periodo" class="form-select" required>
         <option selected disabled>Periodo</option>
         <option value="1">Periodo 1</option>
         <option value="2">Periodo 2</option>
         <option value="3">Periodo 3</option>
       </select>
     </div>
-  <button type="submit" class="btn btn-danger mb">Generar boletin</button> 
+
+    <button type="submit" class="btn btn-danger mb">Generar boletin</button> 
   </div>
 </form>
 
-
-
-</main>
-
-
 <script src="../js/bootstrap.bundle.min.js"></script>
-<script>document.title = 'Boletin Estudiante'</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- <script src="../js/sidebars.js"></script> -->
-</body>
-</html>
+<script>
+  $(document).ready(function() {
+    $('#grado').change(function() {
+      var gradoId = $(this).val();
+
+      // Hacer una petición AJAX para obtener los estudiantes del grado seleccionado
+      $.ajax({
+        url: '/getEstudiantes/' + gradoId,
+        type: 'GET',
+        success: function(data) {
+          $('#estudiante').empty().append('<option selected disabled>Seleccione el estudiante</option>');
+          data.forEach(function(estudiante) {
+            $('#estudiante').append('<option value="' + estudiante.usuCedula + '">' + estudiante.usuApellidoP+ ' '+ estudiante.usuNombre + '</option>');
+          });
+          $('#estudiante').prop('disabled', false);
+        }
+      });
+    });
+  });
+</script>
+
+<script>document.title = 'Boletin Estudiante'</script>
