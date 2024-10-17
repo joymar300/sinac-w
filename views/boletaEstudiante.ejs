@@ -39,8 +39,6 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #f9f9f9;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -90,7 +88,7 @@
             font-weight: t;
         }
 
-        .table tbody tr:nth-child(even) {
+        .table tbody tr {
             background-color: #f2f2f2;
         }
 
@@ -103,7 +101,11 @@
 
         /* Estilos para la impresión */
         @media print {
+            @page{
+                margin: 0;
+            }
             body {
+                margin: 0;
                 background-color: #fff;
                 background-image:  url(../img/fnpf.png);
                 background-size: 100%;
@@ -119,7 +121,7 @@
             }
 
             .table thead th {
-                background-color: #333 !important;
+                background-color: #5db8be !important;
                 color: #fff !important;
             }
 
@@ -151,7 +153,6 @@
                 <thead>
                     <tr>
                         <th scope="col">Materia</th>
-                        
                         <th scope="col">Valor del Promedio</th>
                         <th scope="col">Periodo</th>
                     </tr>
