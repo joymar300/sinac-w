@@ -27,10 +27,27 @@
 
   <h3 class="fs-1" style="margin-left: 370px;">Consultar Estudiante</h3>
   <div style="width: 600px; margin-left: 250px;">
+
+    <!-- Select para Grado -->
     <div class="mb-3">
-     <label for="" class="form-label pb-3">Cedula del Usuario:</label>
-      <input name="cedula" type="text" class="form-control mb-3" value="<%= locals.cedula %>" id="" required>
+      <label for="grado" class="form-label pb-3">Seleccione el grado:</label>
+      <select name="grado" id="grado" class="form-select" required>
+        <option selected disabled>Grado</option>
+        <% results.forEach(function(grado){ %>
+          <option value="<%= grado.idGrado %>"><%= grado.graNombre %></option>
+        <% }); %>
+      </select>
     </div>
+
+    <!-- Select para Estudiantes, inicialmente deshabilitado -->
+    <div class="mb-3">
+      <label for="estudiante" class="form-label">Seleccione el estudiante:</label>
+      <select name="cedula" id="estudiante" class="form-select" disabled required>
+        <option selected disabled>Estudiante</option>
+      </select>
+    </div>
+
+  
     <label for="" class="form-label">Datos a consultar:</label><br>
     <div class="form-check form-check-inline mt-3">
       <input class="form-check-input" type="radio" name="tipo" value="datos">
@@ -51,9 +68,30 @@
 
 </main>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#grado').change(function() {
+      var gradoId = $(this).val();
 
+      // Hacer una petición AJAX para obtener los estudiantes del grado seleccionado
+      $.ajax({
+        url: '/getEstudiantes/' + gradoId,
+        type: 'GET',
+        success: function(data) {
+          $('#estudiante').empty().append('<option selected disabled>Seleccione el estudiante</option>');
+          data.forEach(function(estudiante) {
+            $('#estudiante').append('<option value="' + estudiante.usuCedula + '">' + estudiante.usuApellidoP+ ' '+ estudiante.usuNombre + '</option>');
+          });
+          $('#estudiante').prop('disabled', false);
+        }
+      });
+    });
+  });
+</script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script>document.title = 'Consultar Usuario'</script>
+
 
 <!-- <script src="../js/sidebars.js"></script> -->
 </body>

@@ -2,10 +2,25 @@
 <form action="/genObservacion" method="POST" class="container pt-3 col-md-7 col-lg-8">
     <div class="form-control">
       <h3>Generar Observaciones</h3>
-      <div class="mb-3">
-       <label for="" class="form-label pb-3">identificaión de estudiante:</label>
-        <input name="idEstudiante" type="text" class="form-control mb-3" id="" required>
-      </div>
+          <!-- Select para Grado -->
+    <div class="mb-3">
+      <label for="grado" class="form-label pb-3">Seleccione el grado:</label>
+      <select name="grado" id="grado" class="form-select" required>
+        <option selected disabled>Grado</option>
+        <% results.forEach(function(grado){ %>
+          <option value="<%= grado.idGrado %>"><%= grado.graNombre %></option>
+        <% }); %>
+      </select>
+    </div>
+
+    <!-- Select para Estudiantes, inicialmente deshabilitado -->
+    <div class="mb-3">
+      <label for="estudiante" class="form-label">Seleccione el estudiante:</label>
+      <select name="idEstudiante" id="estudiante" class="form-select" disabled required>
+        <option selected disabled>Estudiante</option>
+      </select>
+    </div>
+
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Seleccione el periodo:</label>
         <select name="periodo" class="form-select" aria-label="Default select example">
@@ -25,3 +40,26 @@
       <button type="submit" class="btn btn-danger mb">enviar</button>
     </div>
 </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#grado').change(function() {
+      var gradoId = $(this).val();
+
+      // Hacer una petición AJAX para obtener los estudiantes del grado seleccionado
+      $.ajax({
+        url: '/getEstudiantes/' + gradoId,
+        type: 'GET',
+        success: function(data) {
+          $('#estudiante').empty().append('<option selected disabled>Seleccione el estudiante</option>');
+          data.forEach(function(estudiante) {
+            $('#estudiante').append('<option value="' + estudiante.usuCedula + '">' + estudiante.usuApellidoP+ ' '+ estudiante.usuNombre + '</option>');
+          });
+          $('#estudiante').prop('disabled', false);
+        }
+      });
+    });
+  });
+</script>

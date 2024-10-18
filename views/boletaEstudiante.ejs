@@ -153,16 +153,26 @@
                 <thead>
                     <tr>
                         <th scope="col">Materia</th>
-                        <th scope="col">Valor del Promedio</th>
                         <th scope="col">Periodo</th>
+                        <th scope="col">Valor del Promedio</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <% let sumaPromedios = 0; %> <!-- Inicializar suma -->
                     <% notas.forEach((notas) => { %>
                     <tr>
                         <th scope="row" style="font-family: mf; font-weight: m"><%= notas.matNombre %></th>
 
-                        <td><%= notas.perNombre %></td>
+                        <td>
+                           <ul>
+                           
+                                <% notas.comentarios.forEach((comentario) => { %>
+                                    <li><%= comentario %></li>
+                                <% }) %>
+
+                           
+                           </ul>
+                        </td>
 
                         <td>
                             <% if (notas.promedio <= 3.0 && notas.promedio > 1.0) { %> 
@@ -174,12 +184,16 @@
                             <% } else if (notas.promedio > 5.0) { %> 
                                 <img src="img/ss.png">
                             <% } %>
+                            <% sumaPromedios += notas.promedio; %>
                         </td>
                     </tr> 
                     <% }) %>
                 </tbody>
             </table>
-
+           
+             <!-- Cálculo y visualización del promedio general -->
+             <% let promedioGeneral = (sumaPromedios / notas.length).toFixed(2); %>
+             <h3>Promedio General: <%= promedioGeneral %></h3>
             <div class="footer">
                 <img src="img/sb.png">
                 <img src="img/sbc.png">
@@ -193,17 +207,10 @@
                     <i class="fa fa-print"></i> Imprimir Boletín
                 </button>
             </div>
-
         </div>
     </div>
 
     <script src="../js/bootstrap.bundle.min.js"></script>
 
-    <!-- Función para imprimir el boletín -->
-    <script>
-        function imprimirBoletin() {
-            window.print();
-        }
-    </script>
 </body>
 </html>

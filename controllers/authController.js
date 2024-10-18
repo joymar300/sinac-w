@@ -221,34 +221,95 @@ exports.notas = (req, res) => {
 
     })
 }
+const obtenerComentariosDesempeno = (notas, callbackFinal) => {
+    let tareasPendientes = notas.length;
+    let notasConComentarios = [];
+
+    // Iterar sobre cada registro de notas
+    notas.forEach((nota) => {
+        const { idMateria, idPeriodo, idGrado } = nota;
+
+        // Consulta para obtener el comentario de desempeño
+        const query = `SELECT comentario FROM desempeno 
+                       WHERE id_materia = ? AND idPeriodo = ? AND idGrado = ?`;
+
+        conexion.query(query, [idMateria, idPeriodo, idGrado], (error, results) => {
+            if (error) {
+                console.error('Error obteniendo comentario de desempeño:', error);
+                nota.comentarios = ['Error obteniendo comentario'];
+            } else if (results.length > 0) {
+                // Guardar los comentarios como una lista
+                nota.comentarios = results.map(r => r.comentario);  // Guardar todos los comentarios como un array
+            } else {
+                nota.comentarios = ['Sin comentarios'];
+            }
+
+            // Añadir la nota con los comentarios al nuevo array
+            notasConComentarios.push(nota);
+
+            // Reducir las tareas pendientes
+            tareasPendientes--;
+
+            // Si todas las tareas han finalizado, llamamos al callback final
+            if (tareasPendientes === 0) {
+                callbackFinal(notasConComentarios);
+            }
+        });
+    });
+};
+
+
+
 exports.boletin = (req, res) => {
-    const periodo = req.body.periodo
-    const cedula = req.body.cedula
-    //console.log(grado, materia, periodo, cedula)
-    conexion.query('SELECT DISTINCT usuNombre, usuApellidoP, usuApellidoM, matNombre, perNombre, eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10, promedio,comentario FROM usuario AS U, evaluaciones AS E, materia AS M, periodo AS P, grupo AS G, grado AS S  join desempeno as D   on  M.idMateria= D.id_materia   WHERE U.id = E.Estudiante_Usuario_id AND M.idMateria = E.Materia_idMateria AND G.Grado_idGrado = S.idGrado AND P.idPeriodo = E.Periodo_idPeriodo AND E.Periodo_idPeriodo = P.idPeriodo AND usuCedula = ? AND  E.Periodo_idPeriodo= ? AND  D.idPeriodo= E.Periodo_idPeriodo AND D.idGrado=S.idGrado   ORDER BY perNombre ',[cedula,periodo], (error, results) =>{
-        if (results.length == 0){
-            res.render('blank', {
-                alert:true,
+    const periodo = req.body.periodo;
+    const cedula = req.body.cedula;
+
+    // Consulta principal de las evaluaciones
+    const query = `
+        SELECT DISTINCT U.usuNombre, U.usuApellidoP, U.usuApellidoM, 
+                        M.matNombre, P.perNombre, E.eva1, E.eva2, E.eva3, 
+                        E.eva4, E.eva5, E.eva6, E.eva7, E.eva8, E.eva9, E.eva10, 
+                        E.promedio, M.idMateria, P.idPeriodo, S.idGrado
+        FROM usuario AS U
+        JOIN evaluaciones AS E ON U.id = E.Estudiante_Usuario_id
+        JOIN materia AS M ON M.idMateria = E.Materia_idMateria
+        JOIN periodo AS P ON P.idPeriodo = E.Periodo_idPeriodo
+        JOIN grupo AS G ON G.Grado_idGrado = E.Grado_idGrado
+        JOIN grado AS S ON S.idGrado = G.Grado_idGrado
+        WHERE U.usuCedula = ? AND E.Periodo_idPeriodo = ?
+        ORDER BY P.perNombre`;
+
+    conexion.query(query, [cedula, periodo], (error, results) => {
+        if (error) {
+            console.error('Error obteniendo las evaluaciones:', error);
+            return res.status(500).send('Error en el servidor');
+        }
+
+        if (results.length == 0) {
+            return res.render('blank', {
+                alert: true,
                 alertTitle: 'Error',
                 alertMessage: 'El estudiante no se encuentra en ese grado y/o materia',
                 alertIcon: 'error',
                 showConfirmButton: true,
                 timer: false,
                 ruta: 'notas'
-            })
-        }else{
-            ubica = results[0]
-            console.log(results)
-            //console.log('Se ha cargado con exito la plantilla tablaNotas')
-    
-            res.render('boletaEstudiante', {notas:results, place:ubica, alert:false})
-    
-            if (error){console.log(error)}
-
+            });
         }
 
-    })
-}
+        // Obtener comentarios de desempeno para cada resultado
+        obtenerComentariosDesempeno(results, (notasConComentarios) => {
+            const ubica = notasConComentarios[0];  // Ubicación del estudiante
+
+            // Renderizar la vista con las notas y los comentarios
+            res.render('boletaEstudiante', {
+                notas: notasConComentarios,
+                place: ubica,
+                alert: false
+            });
+        });
+    });
+};
 
 // genera comentario de desempeño
 exports.genDesempe = (req, res) => {

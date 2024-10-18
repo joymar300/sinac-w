@@ -175,8 +175,9 @@ router.get('/getEstudiantes/:gradoId', (req, res) => {
     // Query para obtener los estudiantes filtrados por el grado seleccionado
     conexion.query('SELECT  DISTINCT usuCedula, usuNombre,usuNombre2,usuApellidoP, usuApellidoM FROM usuario as u join grupo as g WHERE g.Grado_idGrado = ?', [gradoId], (error, result) => {
       if (error) {
-        return res.status(500).send(error);
-      }
+          return res.status(500).send(error);
+        }
+        console.log(result);
       res.json(result); // Devolver los estudiantes en formato JSON
     });
   });
@@ -192,7 +193,13 @@ router.get('/boletin_grupo', (req, res) => {
 })
 
 router.get('/consulta', (req, res) => {
-    res.render('consuCedula')
+    conexion.query('SELECT * FROM grado  ORDER BY graNombre ASC', (error, results) => {
+        if (error){
+            throw error
+        }else{
+            res.render('consuCedula',{ results: results})
+            
+        }})
 })
 
 router.get('/buscar_matricula', (req, res) =>{
@@ -234,7 +241,13 @@ router.get('/desempeno', (req, res) =>{
  
 })
 router.get('/genobservaciones', (req, res) =>{
-    res.render('genobservaciones')
+    conexion.query('SELECT * FROM grado  ORDER BY graNombre ASC', (error, results) => {
+        if (error){
+            throw error
+        }else{
+            res.render('genobservaciones',{results:results})
+
+        }})
 })
 router.get('/contacto', (req, res) =>{
     res.render('contacto')
