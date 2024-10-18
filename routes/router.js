@@ -173,7 +173,7 @@ router.get('/getEstudiantes/:gradoId', (req, res) => {
     const gradoId = req.params.gradoId;
   
     // Query para obtener los estudiantes filtrados por el grado seleccionado
-    conexion.query('SELECT  DISTINCT usuCedula, usuNombre,usuNombre2,usuApellidoP, usuApellidoM FROM usuario as u join grupo as g WHERE g.Grado_idGrado = ?', [gradoId], (error, result) => {
+    conexion.query('SELECT  DISTINCT usuCedula, usuNombre,usuNombre2,usuApellidoP, usuApellidoM FROM usuario as u join grupo as g  on g.Estudiante_Usuario_id=u.id WHERE g.Grado_idGrado = ?', [gradoId], (error, result) => {
       if (error) {
           return res.status(500).send(error);
         }
