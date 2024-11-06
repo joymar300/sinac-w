@@ -153,7 +153,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Materia</th>
-                        <th scope="col">Periodo</th>
+                        <th scope="col">Desempeño</th>
                         <th scope="col">Valor del Promedio</th>
                     </tr>
                 </thead>
@@ -194,6 +194,7 @@
              <!-- Cálculo y visualización del promedio general -->
              <% let promedioGeneral = (sumaPromedios / notas.length).toFixed(2); %>
              <h3>Promedio General: <%= promedioGeneral %></h3>
+                            <% sumaPromedios += notas.promedio; %></h3>
             <div class="footer">
                 <img src="img/sb.png">
                 <img src="img/sbc.png">
