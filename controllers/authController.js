@@ -197,7 +197,7 @@ exports.notas = (req, res) => {
     const periodo = req.body.periodo
     const cedula = req.body.cedula
     //console.log(grado, materia, periodo, cedula)
-    conexion.query('SELECT DISTINCT id, usuCedula, usuNombre, usuNombre2, usuApellidoP, usuApellidoM, idMateria, matNombre, idGrado, graNombre, idPeriodo, perNombre, eva1, eva2, eva3, eva4, eva5, eva6, eva7, eva8, eva9, eva10 FROM usuario AS U, evaluaciones AS E, materia AS M, periodo AS P, grupo AS G, grado AS S WHERE U.id = E.Estudiante_Usuario_id AND M.idMateria = E.Materia_idMateria AND P.idPeriodo = E.Periodo_idPeriodo AND G.Grado_idGrado = S.idGrado AND M.idMateria = G.Materia_idMateria AND idGrado = ? AND idMateria = ? AND Periodo_idPeriodo = ? ',[grado, materia, periodo], (error, results) =>{
+    conexion.query('SELECT DISTINCT id, usuCedula, usuNombre, usuNombre2, usuApellidoP, usuApellidoM, idMateria, matNombre, idGrado, graNombre, idPeriodo, perNombre, eva1, eva2, eva3, eva4, eva5 FROM usuario AS U, evaluaciones AS E, materia AS M, periodo AS P, grupo AS G, grado AS S WHERE U.id = E.Estudiante_Usuario_id AND M.idMateria = E.Materia_idMateria AND P.idPeriodo = E.Periodo_idPeriodo AND G.Grado_idGrado = S.idGrado AND M.idMateria = G.Materia_idMateria AND idGrado = ? AND idMateria = ? AND Periodo_idPeriodo = ? ',[grado, materia, periodo], (error, results) =>{
         if (results.length == 0){
             res.render('blank', {
                 alert:true,
