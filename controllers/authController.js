@@ -268,7 +268,7 @@ exports.boletin = (req, res) => {
     const query = `
         SELECT DISTINCT U.usuNombre, U.usuApellidoP, U.usuApellidoM, 
                         M.matNombre, P.perNombre, E.eva1, E.eva2, E.eva3, 
-                        E.eva4, E.eva5, E.eva6, E.eva7, E.eva8, E.eva9, E.eva10, 
+                        E.eva4, E.eva5,
                         E.promedio, M.idMateria, P.idPeriodo, S.idGrado
         FROM usuario AS U
         JOIN evaluaciones AS E ON U.id = E.Estudiante_Usuario_id
