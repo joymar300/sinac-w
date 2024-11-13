@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <% results.forEach((docente) => { %> 
+        <% results.forEach(function(docente) { %> 
         <tr>
           <th scope="row"><%= docente.usuCedula %></th>
           <td><%= docente.usuNombre %></td>

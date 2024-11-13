@@ -125,10 +125,15 @@ router.get('/grado', (req, res) => {
 })
 
 router.get('/planta', (req, res) => {
-    conexion.query('SELECT id, usuCedula, usuNombre, usuApellidoP, matNombre, graNombre as grados FROM usuario AS U, materia AS M, DocenteMateria AS DM, grado AS G WHERE U.id = DM.Docente_Usuario_id AND DM.Materia_idMateria = M.idMateria AND G.idGrado = DM.Grado_idGrado;', (error, results) =>{
-        res.render('plaDocente', {results:results})
-    })
-})
+    conexion.query('SELECT id, usuCedula, usuNombre, usuApellidoP, matNombre, graNombre as grados FROM usuario AS U, materia AS M, docentemateria AS DM, grado AS G WHERE U.id = DM.Docente_Usuario_id AND DM.Materia_idMateria = M.idMateria AND G.idGrado = DM.Grado_idGrado;', (error, results) => {
+        if (error) {
+            console.error("Error en la consulta:", error);
+            return res.status(500).send("Error en la consulta a la base de datos");
+        }
+        res.render('plaDocente', { results });
+    });
+});
+
 
 router.get('/eventos', (req, res) => {
     conexion.query('SELECT * FROM eventos ORDER BY id DESC', (error, results) =>{
