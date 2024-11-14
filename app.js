@@ -49,7 +49,7 @@
  const { promisify } = require('util');
  const jwt = require('jsonwebtoken');
  const conexion = require('./database/db'); // Asegúrate de tener la conexión a la base de datos
- const port = 8080
+ const port = 3000
  const app = express()
  // Cargar variables de entorno
  dotenv.config({ path: './env/.env' })
