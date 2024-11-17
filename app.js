@@ -99,9 +99,11 @@
  // Rutas
  app.use('/', require('./routes/router'))
  // Iniciar el servidor
- app.listen(port, () => {
-     console.log(`Ejecutando servidor en puerto ${port}`);
- })
+
+ module.exports= app
+//  app.listen(port, () => {
+//      console.log(`Ejecutando servidor en puerto ${port}`);
+//  })
 
 
 //--------------------------------------------------------------
