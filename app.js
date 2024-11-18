@@ -69,6 +69,7 @@ const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const conexion = require('./database/db'); // Asegúrate de tener la conexión a la base de datos
 const path = require('path');
+const port = process.env.PORT || 8080;
 
 const app = express();
 
@@ -130,6 +131,10 @@ app.use((req, res, next) => {
 
 // Rutas
 app.use('/', require('./routes/router'));
+
+  app.listen(port, () => {
+      console.log(`Ejecutando servidor en puerto ${port}`);
+     })
 
 // Exportar la app para Vercel
 module.exports = app;
