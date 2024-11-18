@@ -849,94 +849,108 @@ exports.geneMatricula2 = (req, res) => {
 //     }
 // }
 exports.login = async (req, res) => {
-
     try {
-        const email = req.body.email
-        const pass = req.body.password
-       if(!email || !pass ){
-       res.render('login', {
-            alert:true,
-            alertTitle: 'Advertencia',
-            alertMessage: 'Ingrese Correo y Contraseña',
-            alertIcon: 'warning',
-            showConfirmButton: true,
-            timer: false,
-            ruta: 'login'
-           })
-        }else{
-            conexion.query('SELECT * FROM usuario WHERE usuCorreo = ?', [email], async (error, results)=>{
-                if (results.length == 0 || ! (await bcryptjs.compare(pass, results[0].usuPassword)) ) {
-                    res.render('login', {
-                        alert:true,
-                        alertTitle: 'Error',
-                        alertMessage: 'Correo y/o Contraseña incorrecta',
-                        alertIcon: 'error',
-                        showConfirmButton: true,
-                        timer: false,
-                        ruta: 'login'
-                    })
-                }else{
-                    //inicio de sesion OK
-                    const cedula = results[0].usuCedula
-                    const id = results[0].id
-                    const rol = results[0].Rol_idRol
-                    const token = jwt.sign({id:id}, process.env.JWT_SECRETO, {
-                        expiresIn: process.env.JWT_TIEMPO_EXPIRA
-                    })
-                    //Se obtiene la IP del cliente
-                    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-                    //console.log(ip)
+        const email = req.body.email;
+        const pass = req.body.password;
 
-                    const action = "Inicio de sesion Usuario: " +email + " con Cedula " +cedula
-                    //Se envia el ingreso a sistema a la base de datos
-                    conexion.query('INSERT INTO eventos SET ?', {accion:action}, (error, results)=>{
-                        if (error) {console.log(error)}
-                    })
-
-                    //console.log("Token: " +token+ " para el usuario: " +email)
-
-                    const cookiesOptions = {
-                        expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-                        httpOnly: true
-                    }
-                    if (rol == 1 || rol == 2 || rol == 3){
-                        const tokenCol = jwt.sign({id:id, rol:rol}, process.env.COL_SECRETO, {
-                            expiresIn: process.env.JWT_TIEMPO_EXPIRA
-                        })
-
-                        res.cookie('jwt', token, cookiesOptions)
-                        res.cookie('col', tokenCol, cookiesOptions)
-                        res.render('login', {
-                            alert:true,
-                            alertTitle: 'Conexión exitosa',
-                            alertMessage: 'Login validado',
-                            alertIcon: 'success',
-                            showConfirmButton: false,
-                            timer: 800,
-                            ruta: 'panel'
-                        })
-                        
-                    }else{
-                        res.cookie('jwt', token, cookiesOptions)
-                        res.render('login', {
-                            alert:true,
-                            alertTitle: 'Conexión exitosa',
-                            alertMessage: 'Login validado',
-                            alertIcon: 'success',
-                            showConfirmButton: false,
-                            timer: 800,
-                            ruta: 'panel'
-                        })
-
-                    }
-                }
-            })
+        // Validar entrada
+        if (!email || !pass) {
+            return res.render('login', {
+                alert: true,
+                alertTitle: 'Advertencia',
+                alertMessage: 'Ingrese Correo y Contraseña',
+                alertIcon: 'warning',
+                showConfirmButton: true,
+                timer: false,
+                ruta: 'login',
+            });
         }
 
+        // Consulta a la base de datos
+        conexion.query('SELECT * FROM usuario WHERE usuCorreo = ?', [email], async (error, results) => {
+            if (error) {
+                console.error('Error en la consulta:', error);
+                return res.render('login', {
+                    alert: true,
+                    alertTitle: 'Error',
+                    alertMessage: 'Error interno en el servidor',
+                    alertIcon: 'error',
+                    showConfirmButton: true,
+                    timer: false,
+                    ruta: 'login',
+                });
+            }
+
+            // Verificar resultados
+            if (!results || results.length === 0 || !(await bcryptjs.compare(pass, results[0].usuPassword))) {
+                return res.render('login', {
+                    alert: true,
+                    alertTitle: 'Error',
+                    alertMessage: 'Correo y/o Contraseña incorrecta',
+                    alertIcon: 'error',
+                    showConfirmButton: true,
+                    timer: false,
+                    ruta: 'login',
+                });
+            }
+
+            // Inicio de sesión correcto
+            const cedula = results[0].usuCedula;
+            const id = results[0].id;
+            const rol = results[0].Rol_idRol;
+
+            const token = jwt.sign({ id: id }, process.env.JWT_SECRETO, {
+                expiresIn: process.env.JWT_TIEMPO_EXPIRA,
+            });
+
+            const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+            // Registrar evento
+            const action = `Inicio de sesión Usuario: ${email} con Cédula ${cedula}`;
+            conexion.query('INSERT INTO eventos SET ?', { accion: action }, (eventError) => {
+                if (eventError) console.error('Error al registrar evento:', eventError);
+            });
+
+            // Configuración de cookies
+            const cookiesOptions = {
+                expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+                httpOnly: true,
+            };
+
+            if ([1, 2, 3].includes(rol)) {
+                const tokenCol = jwt.sign({ id: id, rol: rol }, process.env.COL_SECRETO, {
+                    expiresIn: process.env.JWT_TIEMPO_EXPIRA,
+                });
+
+                res.cookie('jwt', token, cookiesOptions);
+                res.cookie('col', tokenCol, cookiesOptions);
+            } else {
+                res.cookie('jwt', token, cookiesOptions);
+            }
+
+            return res.render('login', {
+                alert: true,
+                alertTitle: 'Conexión exitosa',
+                alertMessage: 'Login validado',
+                alertIcon: 'success',
+                showConfirmButton: false,
+                timer: 800,
+                ruta: 'panel',
+            });
+        });
     } catch (error) {
-        console.log(error)
+        console.error('Error en login:', error);
+        return res.render('login', {
+            alert: true,
+            alertTitle: 'Error',
+            alertMessage: 'Error interno en el servidor',
+            alertIcon: 'error',
+            showConfirmButton: true,
+            timer: false,
+            ruta: 'login',
+        });
     }
-}
+};
 
 
 
