@@ -69,7 +69,7 @@ const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const conexion = require('./database/db'); // Asegúrate de tener la conexión a la base de datos
 const path = require('path');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 const app = express();
 
